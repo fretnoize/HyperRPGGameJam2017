@@ -33,23 +33,6 @@ namespace Assets.Game.Scripts
         // Update is called once per frame
         void Update()
         {
-            if (!UiController.optionsMenu || !UiController.mainMenu)
-            {
-                return;
-            }
-
-            if (Input.GetAxis("Vertical") < 0 && !this.raiseTablet && !this.lowerTablet)
-            {
-                if (this.tabletIsUp)
-                {
-                    this.PutTabletAway();
-                }
-                else 
-                {
-                    this.BringTabletUp();
-                }
-            }
-
             if (this.raiseTablet)
             {
                 var distCovered = (Time.time - this.startLerpTime) * this.tabletMovementSpeed;
@@ -77,6 +60,24 @@ namespace Assets.Game.Scripts
                     this.tabletIsUp = false;
                 }
             }
+
+            if (!UiController.optionsMenu || !UiController.mainMenu)
+            {
+                return;
+            }
+
+            if (Input.GetAxis("Vertical") < 0 && !this.raiseTablet && !this.lowerTablet)
+            {
+                if (this.tabletIsUp)
+                {
+                    this.PutTabletAway();
+                }
+                else 
+                {
+                    this.BringTabletUp();
+                }
+            }
+
         }
 
         private void TurnTabletOn()
