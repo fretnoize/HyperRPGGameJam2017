@@ -24,7 +24,7 @@ public class UIController : MonoBehaviour {
 
 		toggleOptions();
 
-		volumeSlider = gameObject.GetComponent<Slider> ();
+		volumeSlider = gameObject.AddComponent<Slider> ();
 		volumeSlider.value = 1f;
 
 	}
