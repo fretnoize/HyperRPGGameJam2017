@@ -84,7 +84,7 @@ public class CreditsTools : MonoBehaviour {
         // TODO: calculate the height the scrolling text should disappear
         // Needs actual canvas dimension
         // Also may be worth looking into whether unity can calculate whether this is on screen or not.
-        float disappearHeight = 750;
+        float disappearHeight = 1250;
 
         Vector2 original = creditsScroll.anchoredPosition;
         creditsScroll.anchoredPosition = new Vector2(0, -400);

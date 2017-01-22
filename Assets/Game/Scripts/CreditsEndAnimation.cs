@@ -19,7 +19,7 @@ public class CreditsEndAnimation : CreditsTools {
         string[] linesTyped = new string[] { "This was a TeamThumper production." };
         string[][] linesFade = new string[][] {
             new string[] {
-                "<b>Game Directors</b>", "Malika Lim", "Patrick “Krund”. Quinn", "",
+                "<b>Game Directors</b>", "Malika Lim", "Patrick “Krund” Quinn", "",
                 "<b>Lead Writer</b>", "Peter V. Baikun"
             },
             new string[] {
