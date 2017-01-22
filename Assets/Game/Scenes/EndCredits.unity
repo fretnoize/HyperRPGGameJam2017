@@ -99,8 +99,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 180637884}
-  - component: {fileID: 180637883}
   - component: {fileID: 180637885}
+  - component: {fileID: 180637883}
   m_Layer: 5
   m_Name: CreditsAnimation
   m_TagString: Untagged
@@ -116,17 +116,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 180637882}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4d7b046650b36f4387d457358f71af0, type: 3}
+  m_Script: {fileID: 11500000, guid: 0ceb100f33062094394768a68dd838af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textArea: {fileID: 1748474013}
-  strings:
-  - This is a test.
-  - This is also a test.
-  - What do we do here?
-  - More random text.
-  - And even more random text.
-  speed: 0.01
+  credits: {fileID: 1748474013}
+  start: 255
+  end: 0
+  delay: 0.1
 --- !u!224 &180637884
 RectTransform:
   m_ObjectHideFlags: 0
@@ -159,6 +155,7 @@ MonoBehaviour:
   creditsScroll: {fileID: 2118053293}
   creditsText: {fileID: 2118053294}
   scrollDelay: 0.001
+  typedDelay: 0.1
 --- !u!1 &746614660
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,7 +229,7 @@ GameObject:
   - component: {fileID: 1748474014}
   - component: {fileID: 1748474013}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Testing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -259,10 +256,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
-    m_FontStyle: 0
+    m_FontSize: 25
+    m_FontStyle: 1
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 2
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0

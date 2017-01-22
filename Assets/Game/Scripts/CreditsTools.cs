@@ -8,19 +8,82 @@ public class CreditsTools : MonoBehaviour {
     public Text creditsText;
     public float scrollDelay = 0.1f;
     public float typedDelay = 0.1f;
+    public float floatIntervals = 60;
 
     protected bool running = true;
 
+    protected void TextShow()
+    {
+        creditsText.color = new Color(creditsText.color.r, creditsText.color.g, creditsText.color.b, 1.0f);
+    }
+
+    protected void TextHide()
+    {
+        creditsText.color = new Color(creditsText.color.r, creditsText.color.g, creditsText.color.b, 1.0f);
+    }
+
+    /// <summary>
+    /// Fade text in and out on the screen
+    /// </summary>
+    /// <param name="lines"></param>
+    /// <param name="fadeTime"></param>
+    /// <param name="pauseTime"></param>
+    /// <returns></returns>
+    protected IEnumerator StartFade(string[] lines, float fadeTime, float pauseTime)
+    {
+        string textFade = "";
+        for (int i = 0; i < lines.Length; i++)
+        {
+            textFade += lines[i] + "\n";
+        }
+
+        TextHide();
+        creditsText.text = textFade;
+        yield return StartCoroutine(DisplayFade(0.0f, 1.0f, floatIntervals, fadeTime));
+        yield return new WaitForSeconds(pauseTime);
+        yield return StartCoroutine(DisplayFade(1.0f, 0.0f, floatIntervals, fadeTime));
+        creditsText.text = "";
+        TextShow();
+    }
+
+    IEnumerator DisplayFade(float start, float end, float intervals, float time)
+    {
+        float r = creditsText.color.r;
+        float g = creditsText.color.g;
+        float b = creditsText.color.b;
+
+        float delay = time / intervals;
+
+        for (int i = 0; i < intervals; i++)
+        {
+            yield return new WaitForSeconds(delay);
+            float a = start + ((end - start) * (i / intervals));
+            creditsText.color = new Color(r, g, b, a);
+        }
+
+        yield return 0;
+    }
+
+    /// <summary>
+    /// Move the credits text off screen and begin scrolling it upwards.
+    /// </summary>
+    /// <param name="lines">String array with the lines to scroll up the screen.</param>
+    /// <returns>To allow yielding for it to finish.</returns>
     protected IEnumerator StartScroll(string[] lines)
     {
+        // NOTE: Theoretically this should get the dimensions of the game canvas.
+        // In practice it doesn't seem to work correctly
         RectTransform canvas = gameObject.GetComponent<RectTransform>();
         print(canvas.rect.height);
         print(canvas.rect.width);
 
+        // TODO: calculate the height the scrolling text should disappear
+        // Needs actual canvas dimension
+        // Also may be worth looking into whether unity can calculate whether this is on screen or not.
+        float disappearHeight = 750;
+
         Vector2 original = creditsScroll.anchoredPosition;
         creditsScroll.anchoredPosition = new Vector2(0, -400);
-
-        float disappearHeight = 750;
 
         string textScroll = "";
         for (int i=0; i<lines.Length; i++)
@@ -47,6 +110,11 @@ public class CreditsTools : MonoBehaviour {
         yield return 0;
     }
 
+    /// <summary>
+    /// Begin 'typing' text into the credits text.
+    /// </summary>
+    /// <param name="lines">String array with the lines to be displayed.</param>
+    /// <returns></returns>
     protected IEnumerator StartTyped(string[] lines)
     {
         yield return StartCoroutine(DisplayTyped(lines, typedDelay));
