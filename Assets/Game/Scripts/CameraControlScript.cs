@@ -1,5 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿// seem unessecary
+// using System.Collections;
+// using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraControlScript : MonoBehaviour
@@ -11,26 +12,16 @@ public class CameraControlScript : MonoBehaviour
 	public SpriteRenderer backdrop;
 
 	// Use this for initialization
-	void Start ()
+	/*void Start ()
 	{
-		// unsure if this is necessary, the properties of the camera object seem to already be available. i.e. `transform` rather than `camera.transform`
-		/*Camera camera = null;
-		Camera[] cameras = Camera.allCameras;
-		foreach (Camera item in cameras) {
-			if (item.name.Equals ("PlayerCamera")) {
-				camera = item;
-			}
-		}
-		if (camera == null) {
-			Debug.Log ("PlayerCamera not found");
-		}*/
-	}
+
+	}*/
 
 	// LateUpdate is called once per frame, after all items have been processed in `Update`
 	// So that the player or any other objects have moved and updated
 	void LateUpdate ()
 	{
-		Debug.Log ("Updating camera position by reading input. Adjusting camera ");
+		// Debug.Log ("Updating camera position by reading input. Adjusting camera ");
 
 		// seems a more general form of getting "left/right" user input. Both arrow keys and WASD
 		float moveHorizontal = Input.GetAxis ("Horizontal");
@@ -38,6 +29,7 @@ public class CameraControlScript : MonoBehaviour
 		// wrapping the camera to the other side of the scene
 		// `backdrop.bounds.max.x` is the rightmost edge of the backdrop (pos x) while `min` is the leftmost edge
 		if (transform.position.x > backdrop.bounds.max.x) {
+			// seems the `z` variable needs to be set to -10, at least occasionally. Otherwise the camera will end up at z = 1
 			transform.position = new Vector3 (backdrop.bounds.min.x, 0, -10);
 		} else if (transform.position.x < backdrop.bounds.min.x) {
 			transform.position = new Vector3 (backdrop.bounds.max.x, 0, -10);
