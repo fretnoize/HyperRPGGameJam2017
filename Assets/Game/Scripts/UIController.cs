@@ -30,8 +30,9 @@ namespace Assets.Game.Scripts
 
         void Update()
         {
+
             // press esc to open and cose the options menu
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (!this.onMainMenu && Input.GetKeyDown(KeyCode.Escape))
             {
                 ToggleOptions();
             }
