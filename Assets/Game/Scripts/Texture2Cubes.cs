@@ -28,6 +28,17 @@ namespace Assets.Game.Scripts
         public GameObject prefab;
         public float speed = 500.0f;
 
+        [Tooltip ("Destination is just a visual aid, keep at 0,0,0")]
+        public GameObject DestinationMarker;
+        [Tooltip ("Center of horizontal plane PixelCubes spawn at")]
+        public GameObject StartMarker;
+        [Tooltip ("Length and depth of the area PixelCubes can randomly spawn")]
+        public float StartArea;
+
+        public float MinFormTime, MaxFormTime;
+
+        private Vector3 startMarkerLocation;
+
         private bool mouseDown = false;
 
         private bool puzzleSolved = false;
@@ -36,6 +47,12 @@ namespace Assets.Game.Scripts
 
         private GameObject cubeFolder;
 
+        private void Awake()
+        {
+            startMarkerLocation = StartMarker.transform.position;
+            Destroy(StartMarker);
+            Destroy(DestinationMarker);
+        }
         // Use this for initialization
         void Start()
         {
@@ -66,13 +83,18 @@ namespace Assets.Game.Scripts
                 if (!(Math.Abs(currColor.a) < 0.001f))
                 {
                     var z = Random.Range(0f, depth);
-                    var cube = Instantiate(this.prefab, new Vector3(-1 * (width / 2) + x + 1.5f, -1 * (height / 2) + y - 2.5f, -1 * Convert.ToSingle(depth / 2) + z), Quaternion.identity);
+                    var cube = Instantiate(this.prefab, 
+                        new Vector3(-1 * (width / 2) + x + 1.5f, 
+                        -1 * (height / 2) + y - 2.5f, 
+                        -1 * Convert.ToSingle(depth / 2) + z), Quaternion.identity);
+
                     cube.name = "Cube (" + x + ", " + y + ")";
                     cube.transform.parent = this.cubeFolder.transform;
                     var cubeRenderer = cube.GetComponent<Renderer>();
                     cubeRenderer.material.color = currColor;
                     cubes++;
-
+                    cube.GetComponent<PixelCube>().SetStart(startMarkerLocation, StartArea, MinFormTime, MaxFormTime, cubeFolder.transform);
+                    cube.transform.parent = null;
                     minX = Math.Min(x, minX);
                     minY = Math.Min(y, minY);
                     minZ = Math.Min(z, minZ);
@@ -97,6 +119,7 @@ namespace Assets.Game.Scripts
 
             this.solvedThreshold = this.solvedThresholdSlider.value;
             this.solvedThresholdSlider.onValueChanged.AddListener(this.UpdateSliderValue);
+            SpinPuzzle();
         }
 
         private void UpdateSliderValue(float arg0)

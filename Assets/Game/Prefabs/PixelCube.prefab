@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4435954725221868}
   - component: {fileID: 33501767544063408}
   - component: {fileID: 23086722623670994}
+  - component: {fileID: 114977986518920802}
   m_Layer: 0
   m_Name: PixelCube
   m_TagString: Untagged
@@ -79,3 +80,38 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1186313980225878}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114977986518920802
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1186313980225878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3d5b625acd391844bd1ecc11a4e67a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MovementCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: -0.02115638
+      outSlope: -0.02115638
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.7516109
+      value: 1.2774104
+      inSlope: -0.032840244
+      outSlope: -0.032840244
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: -0.076248184
+      outSlope: -0.076248184
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
