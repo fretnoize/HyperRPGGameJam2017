@@ -12,7 +12,7 @@ public class CreditsBeginAnimation : CreditsTools
     IEnumerator DisplayCredits()
     {
         string[] linesTyped = new string[] { "TeamThumper presents..." };
-        string[] linesFade = new string[] { "The Thumpening!", "(aka insert title here)" };
+        string[] linesFade = new string[] { "Echoes" };
 
         yield return BlankPause(1.0f);
         yield return StartTyped(linesTyped, 3.0f);
