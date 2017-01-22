@@ -5,11 +5,13 @@ using UnityEngine.EventSystems;
 
 public class UIController : MonoBehaviour {
 
+	// menu/options objects
 	static GameObject[] menuObjects;
 	static GameObject[] optionsObjects;
 	static bool optionsMenu;
 	static bool mainMenu;
 
+	// audio
 	AudioSource audio;
 	public Slider volumeSlider;
 	public AudioSource volumeAudio;
@@ -20,51 +22,37 @@ public class UIController : MonoBehaviour {
 		optionsObjects = GameObject.FindGameObjectsWithTag ("Options");
 
 		audio = GetComponent<AudioSource>();
-
 		toggleOptions();
 
 
 	}
 	
-	// Update is called once per frame
 	void Update () {
-
+		
+		// press esc to open and cose the options menu
 		if (Input.GetKeyDown (KeyCode.Escape)) {
-			
 			toggleOptions ();
 		}
-		
 	}
 
+	// removes the menu when the game begins
 	public void LoadGame() {
 		toggleMenu ();
-
 	}
 
+	// deactivates the main menu objects, activates the options objects
 	public void Options() {
 		UIController.toggleOptions ();
 		UIController.toggleMenu ();
 	}
 
+	// opposite of above
 	public void Back() {
 		UIController.toggleOptions ();
 		UIController.toggleMenu ();
 	}
-
-	private static void toggleOptions() {
-		foreach (GameObject o in optionsObjects) {
-			o.SetActive (optionsMenu);
-		}
-		toggleOptionsState ();
-	}
-
-	private static void toggleMenu() {
-		foreach (GameObject m in menuObjects) {
-			m.SetActive (mainMenu);
-		}
-		toggleMenuState ();
-	}
-
+		
+	// mutes sound
 	public void MuteSound() {
 		if (audio.mute)
 			audio.mute = false;
@@ -72,21 +60,30 @@ public class UIController : MonoBehaviour {
 			audio.mute = true;
 	}
 
+	// controls volume
 	public void VolumeController() {
 		volumeSlider.value = volumeAudio.volume;
 	}
 
+	// exits the game
 	public void exitApplication(){
 		Application.Quit ();
 	}
-
-	private static void toggleOptionsState() {
+		
+	// avticates/deactivates the options objects
+	private static void toggleOptions() {
+		foreach (GameObject o in optionsObjects) {
+			o.SetActive (optionsMenu);
+		}
 		UIController.optionsMenu = !UIController.optionsMenu;
-	
 	}
 
-	private static void toggleMenuState() {
+	// avticates/deactivates the main menu objects
+	private static void toggleMenu() {
+		foreach (GameObject m in menuObjects) {
+			m.SetActive (mainMenu);
+		}
 		UIController.mainMenu = !UIController.mainMenu;
-
 	}
+
 }
