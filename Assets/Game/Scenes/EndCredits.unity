@@ -136,9 +136,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 916386a8a51c65341883f00d3755cd98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 1928801504}
+  creditsLayout: {fileID: 0}
   creditsScroll: {fileID: 2118053293}
   creditsText: {fileID: 2118053294}
-  scrollDelay: 0.001
+  scrollDelay: 0.01
+  scrollStep: 2
   typedDelay: 0.1
   floatIntervals: 60
 --- !u!1 &746614660
@@ -393,6 +396,7 @@ GameObject:
   - component: {fileID: 2118053293}
   - component: {fileID: 2118053295}
   - component: {fileID: 2118053294}
+  - component: {fileID: 2118053296}
   m_Layer: 5
   m_Name: CreditsText
   m_TagString: Untagged
@@ -413,10 +417,10 @@ RectTransform:
   m_Father: {fileID: 1928801504}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 350}
-  m_SizeDelta: {x: 500, y: 100}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 100}
+  m_SizeDelta: {x: 500, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2118053294
 MonoBehaviour:
@@ -439,7 +443,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 32
+    m_FontSize: 24
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -450,12 +454,25 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: '<b>Initial Text:</b>
+  m_Text: '<b>End / Closing Credits</b>
 
-    This should never be shown.'
+    This text should never be visible.'
 --- !u!222 &2118053295
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2118053292}
+--- !u!114 &2118053296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2118053292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1741964061, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 0

@@ -10,7 +10,7 @@ public class CreditsEndAnimation : CreditsTools {
     void Update () {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            // TODO something to exit the menu
+            // TODO something to exit the credits
         }
     }
 	
@@ -19,31 +19,31 @@ public class CreditsEndAnimation : CreditsTools {
         string[] linesTyped = new string[] { "This was a TeamThumper production." };
         string[][] linesFade = new string[][] {
             new string[] {
-                "<b>Game Directors</b>", "Malika Lim", "Patrick “Krund” Quinn", "",
-                "<b>Lead Writer</b>", "Peter V. Baikun"
+                "<size=32><b>Game Directors</b></size>", "Malika Lim", "Patrick “Krund” Quinn", "",
+                "<size=32><b>Lead Writer</b></size>", "Peter V. Baikun"
             },
             new string[] {
-                "<b>Art Directors</b>", "Jennifer “aminim00se” Cleary", "Malika Lim", "",
-                "<b>Lead UI</b>", "Razeruk"
+                "<size=32><b>Art Directors</b></size>", "Jennifer “aminim00se” Cleary", "Malika Lim", "",
+                "<size=32><b>Lead UI</b></size>", "Razeruk"
             },
             new string[] {
-                "<b>Lead Programmer</b>", "Padarr", "",
-                "<b>Lead Quality Assurance</b>", "Kristal “Lady Kakyuu” Rupard"
+                "<size=32><b>Lead Programmer</b></size>", "Padarr", "",
+                "<size=32><b>Lead Quality Assurance</b></size>", "Kristal “Lady Kakyuu” Rupard"
             },
             new string[] {
-                "<b>Music</b>", "Poor Alexei - ‘Interiors’", "Visager - ‘Village Dreaming’", "Aaron C. Edwards - ‘Don’t Cry’"
+                "<size=32><b>Music</b></size>", "Poor Alexei - ‘Interiors’", "Visager - ‘Village Dreaming’", "Aaron C. Edwards - ‘Don’t Cry’"
             },
             new string[] {
-                "<b>Special Thanks</b>", "To the thumper community and HyperRPG", "To the Global Game Jam", "And you the player."
+                "<size=32><b>Special Thanks</b></size>", "To the thumper community and HyperRPG", "To the Global Game Jam", "And you the player."
             },
         };
         string[] linesScroll = new string[] {
-            "<b>Writers</b>", "Person 1", "Person 2", "",
-            "<b>Programmers</b>", "Person 1", "Person 2", "",
-            "<b>Artists</b>", "Person 1", "Person 2", "",
-            "<b>Sound Designers</b>", "Person 1", "Person 2", "",
-            "<b>Voice Actors</b>", "Person 1", "Person 2", "",
-            "<b>Testers</b>", "Person 1", "Person 2", "",
+            "<size=32><b>Writers</b></size>", "Person 1", "Person 2", "",
+            "<size=32><b>Programmers</b></size>", "Person 1", "Person 2", "",
+            "<size=32><b>Artists</b></size>", "Person 1", "Person 2", "",
+            "<size=32><b>Sound Designers</b></size>", "Person 1", "Person 2", "",
+            "<size=32><b>Voice Actors</b></size>", "Person 1", "Person 2", "",
+            "<size=32><b>Testers</b></size>", "Person 1", "Person 2", "",
         };
 
         yield return BlankPause(1.0f);

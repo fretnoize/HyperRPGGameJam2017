@@ -4,9 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class CreditsTools : MonoBehaviour {
+    public RectTransform canvas;
+    public LayoutElement creditsLayout;
     public RectTransform creditsScroll;
     public Text creditsText;
     public float scrollDelay = 0.1f;
+    public float scrollStep = 1f;
     public float typedDelay = 0.1f;
     public float floatIntervals = 60;
 
@@ -77,17 +80,18 @@ public class CreditsTools : MonoBehaviour {
     {
         // NOTE: Theoretically this should get the dimensions of the game canvas.
         // In practice it doesn't seem to work correctly
-        RectTransform canvas = gameObject.GetComponent<RectTransform>();
         print(canvas.rect.height);
-        print(canvas.rect.width);
+        print(creditsScroll.rect.height);
 
+        float midHeight = canvas.rect.height / 2;
+        float startHeight = -midHeight - 50;
         // TODO: calculate the height the scrolling text should disappear
         // Needs actual canvas dimension
         // Also may be worth looking into whether unity can calculate whether this is on screen or not.
         float disappearHeight = 1250;
 
         Vector2 original = creditsScroll.anchoredPosition;
-        creditsScroll.anchoredPosition = new Vector2(0, -400);
+        creditsScroll.anchoredPosition = new Vector2(0, startHeight);
 
         string textScroll = "";
         for (int i=0; i<lines.Length; i++)
@@ -107,7 +111,7 @@ public class CreditsTools : MonoBehaviour {
     {
         while (creditsScroll.anchoredPosition.y < height)
         {
-            creditsScroll.anchoredPosition += Vector2.up;
+            creditsScroll.anchoredPosition += new Vector2(0, scrollStep);
             yield return new WaitForSeconds(speed);
         }
     }
