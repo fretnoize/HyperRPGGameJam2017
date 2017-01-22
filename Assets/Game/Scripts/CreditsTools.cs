@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class CreditsTools : MonoBehaviour {
     public RectTransform canvas;
-    public LayoutElement creditsLayout;
     public RectTransform creditsScroll;
     public Text creditsText;
     public float scrollDelay = 0.1f;

@@ -19,7 +19,8 @@ public class CreditsEndAnimation : CreditsTools {
         string[] linesTyped = new string[] { "This was a TeamThumper production." };
         string[][] linesFade = new string[][] {
             new string[] {
-                "<size=32><b>Game Directors</b></size>", "Malika Lim", "Patrick “Krund” Quinn", "",
+                "<size=32><b>Producer</b></size>", "Malika Lim", "",
+                "<size=32><b>Game Director</b></size>", "Patrick “Krund” Quinn", "",
                 "<size=32><b>Lead Writer</b></size>", "Peter V. Baikun"
             },
             new string[] {
@@ -27,23 +28,24 @@ public class CreditsEndAnimation : CreditsTools {
                 "<size=32><b>Lead UI</b></size>", "Razeruk"
             },
             new string[] {
-                "<size=32><b>Lead Programmer</b></size>", "Padarr", "",
+                "<size=32><b>Lead Programmers</b></size>", "Padarr", "Eurghsireawe", "",
                 "<size=32><b>Lead Quality Assurance</b></size>", "Kristal “Lady Kakyuu” Rupard"
             },
             new string[] {
                 "<size=32><b>Music</b></size>", "Poor Alexei - ‘Interiors’", "Visager - ‘Village Dreaming’", "Aaron C. Edwards - ‘Don’t Cry’"
             },
             new string[] {
-                "<size=32><b>Special Thanks</b></size>", "To the thumper community and HyperRPG", "To the Global Game Jam", "And you the player."
+                "<size=32><b>Special Thanks</b></size>", "To the thumper community and HyperRPG", "To the Global Game Jam", "And you the player"
             },
         };
         string[] linesScroll = new string[] {
-            "<size=32><b>Writers</b></size>", "Person 1", "Person 2", "",
-            "<size=32><b>Programmers</b></size>", "Person 1", "Person 2", "",
-            "<size=32><b>Artists</b></size>", "Person 1", "Person 2", "",
-            "<size=32><b>Sound Designers</b></size>", "Person 1", "Person 2", "",
-            "<size=32><b>Voice Actors</b></size>", "Person 1", "Person 2", "",
-            "<size=32><b>Testers</b></size>", "Person 1", "Person 2", "",
+            "<size=32><b>Writers</b></size>", "Dgwritingfiend", "Stephen “Xjere” Zalar", "Bonebumble", "Louis “SillySonny” Goodwin", "",
+            "<size=32><b>Programmers</b></size>", "Anna M. Berg", "Nick “quiet_geek” Elliott", "",
+            "<size=32><b>Artists</b></size>", "Jennifer “aminim00se” Cleary", "",
+            "<size=32><b>Sound Designer</b></size>", "Dgwritingfiend", "",
+            "<size=32><b>Sound Consultant</b></size>", "Louis “SillySonny” Goodwin", "",
+            "<size=32><b>Voice Actors</b></size>", "Child - Kristal “Lady Kakyuu” Rupard", "Father - Patrick “Krund” Quinn", "Politician - Jennifer “aminim00se” Cleary", "Scientist - Louis “SillySonny” Goodwin", "",
+            "<size=32><b>Testers</b></size>", "KyuuiPenguin", "Louis “SillySonny” Goodwin", "Joninyan",
         };
 
         yield return BlankPause(1.0f);
@@ -54,7 +56,7 @@ public class CreditsEndAnimation : CreditsTools {
         yield return StartFade(linesFade[2], 1.0f, 2.0f);
         yield return StartFade(linesFade[3], 1.0f, 2.0f);
         yield return StartScroll(linesScroll);
-        yield return StartFade(linesFade[4], 1.0f, 4.0f);
+        yield return StartFade(linesFade[4], 1.0f, 6.0f);
         yield return BlankPause(1.0f);
         creditsText.text = "Thank you for playing and we hope you enjoyed the game.";
     }
