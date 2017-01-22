@@ -1298,6 +1298,34 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 841998913}
+--- !u!1 &886787647
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 886787648}
+  m_Layer: 0
+  m_Name: Disc Folder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &886787648
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 886787647}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2118393340}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &952725059
 GameObject:
   m_ObjectHideFlags: 0
@@ -2322,6 +2350,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2118393340}
   - component: {fileID: 2118393339}
+  - component: {fileID: 2118393341}
   m_Layer: 0
   m_Name: Root Game Screen
   m_TagString: Untagged
@@ -2376,9 +2405,24 @@ Transform:
   m_Children:
   - {fileID: 1168158675}
   - {fileID: 597024425}
+  - {fileID: 886787648}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2118393341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2118393338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7719cb4ab59de5a45843a2fc086a1266, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DiscPrefab: {fileID: 4604524846645948, guid: 958b6c9349132f149982e3f2f7a8eef2, type: 2}
+  DiscFolder: {fileID: 886787648}
+  NumberOfDiscs: 4
 --- !u!1 &2146328891
 GameObject:
   m_ObjectHideFlags: 0
