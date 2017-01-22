@@ -126,7 +126,7 @@ MonoBehaviour:
   - What do we do here?
   - More random text.
   - And even more random text.
-  speed: 0.1
+  speed: 0.01
 --- !u!224 &180637884
 RectTransform:
   m_ObjectHideFlags: 0
@@ -153,12 +153,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 180637882}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d53b1f7b80f320d4c8f810364cc79c8f, type: 3}
+  m_Script: {fileID: 11500000, guid: 916386a8a51c65341883f00d3755cd98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scroll: {fileID: 2118053293}
-  credits: {fileID: 0}
-  delay: 0
+  creditsScroll: {fileID: 2118053293}
+  creditsText: {fileID: 2118053294}
+  scrollDelay: 0.001
 --- !u!1 &746614660
 GameObject:
   m_ObjectHideFlags: 0
@@ -506,9 +506,9 @@ RectTransform:
   m_Father: {fileID: 1928801504}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 75}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 350}
   m_SizeDelta: {x: 500, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2118053294

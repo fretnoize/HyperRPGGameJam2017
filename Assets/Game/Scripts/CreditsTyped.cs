@@ -8,11 +8,6 @@ public class CreditsTyped : MonoBehaviour {
     public string[] strings;
     public float speed = 0.2f;
 
-    private int stringIndex = 0;
-    private int characterIndex = 0;
-
-    private bool running = true;
-    private string text = "";
 
     // Use this for initialization
     void Start () {
@@ -21,12 +16,18 @@ public class CreditsTyped : MonoBehaviour {
 
     IEnumerator DisplayTyped(string[] lines)
     {
+        int stringIndex = 0;
+        int characterIndex = 0;
+
+        bool running = true;
+        string text = "";
+
         while (running)
         {
             yield return new WaitForSeconds(speed);
             if (characterIndex > lines[stringIndex].Length)
             {
-                text += lines[stringIndex] + "\\n";
+                text += lines[stringIndex] + "\n";
                 stringIndex++;
                 characterIndex = 0;
 

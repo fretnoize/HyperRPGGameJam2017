@@ -3,46 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CreditsAnimation : MonoBehaviour {
-    public RectTransform scroll;
-    public Text credits;
-    public float scrollDelay = 0.1f;
-
-    private bool running = false;
-
-    // Use this for initialization
+public class CreditsAnimation : CreditsTools {
     void Start () {
+        StartCoroutine(DisplayCredits());
+    }
+
+    void Update () {
+        if ()
+        {
+
+        }
     }
 	
-	// Update is called once per frame
-	void Update () {
-	}
-
     IEnumerator DisplayCredits()
     {
-        yield return 0;
-    }
+        string[] linesTyped = new string[] { "This will be typed out in the middle of the screen." };
+        string[] linesFade = new string[] { "This should fade in and out." };
+        string[] linesScroll = new string[] { "<b>Title</b>", "Person 1", "Person 2", "", "<b>Title</b>", "Person 1", "Person 2" };
 
-    void DoScroll()
-    {
-        Vector2 original = scroll.anchoredPosition;
-        scroll.anchoredPosition = new Vector2(0, -400);
-        running = true;
-
-        StartCoroutine(DisplayScroll(scrollDelay));
-
-        // Hide here
-        scroll.anchoredPosition = original;
-    }
-
-    IEnumerator DisplayScroll(float speed)
-    {
-        while (running)
-        {
-            scroll.anchoredPosition += Vector2.up;
-            yield return new WaitForSeconds(speed);
-        }
-
+        yield return StartTyped(linesTyped);
+        yield return StartScroll(linesScroll);
+        creditsText.text = "Scrolling done!";
         yield return 0;
     }
 }
