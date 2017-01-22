@@ -2,8 +2,6 @@
 
 namespace Assets.Game.Scripts
 {
-    using UnityEngine.WSA;
-
     public class ObjectManager : MonoBehaviour
     {
         public Transform DiscPrefab;
