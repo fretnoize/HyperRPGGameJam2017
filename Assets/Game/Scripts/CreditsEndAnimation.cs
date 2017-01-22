@@ -54,7 +54,7 @@ public class CreditsEndAnimation : CreditsTools {
         yield return StartFade(linesFade[2], 1.0f, 2.0f);
         yield return StartFade(linesFade[3], 1.0f, 2.0f);
         yield return StartScroll(linesScroll);
-        yield return StartFade(linesFade[4], 1.0f, 2.0f);
+        yield return StartFade(linesFade[4], 1.0f, 4.0f);
         yield return BlankPause(1.0f);
         creditsText.text = "Thank you for playing and we hope you enjoyed the game.";
     }

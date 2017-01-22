@@ -78,17 +78,8 @@ public class CreditsTools : MonoBehaviour {
     /// <returns>To allow yielding for it to finish.</returns>
     protected IEnumerator StartScroll(string[] lines)
     {
-        // NOTE: Theoretically this should get the dimensions of the game canvas.
-        // In practice it doesn't seem to work correctly
-        print(canvas.rect.height);
-        print(creditsScroll.rect.height);
-
         float midHeight = canvas.rect.height / 2;
         float startHeight = -midHeight - 50;
-        // TODO: calculate the height the scrolling text should disappear
-        // Needs actual canvas dimension
-        // Also may be worth looking into whether unity can calculate whether this is on screen or not.
-        float disappearHeight = 1250;
 
         Vector2 original = creditsScroll.anchoredPosition;
         creditsScroll.anchoredPosition = new Vector2(0, startHeight);
@@ -100,8 +91,9 @@ public class CreditsTools : MonoBehaviour {
         }
 
         creditsText.text = textScroll;
+        float endHeight = midHeight + creditsText.preferredHeight + 10;
 
-        yield return StartCoroutine(DisplayScroll(scrollDelay, disappearHeight));
+        yield return StartCoroutine(DisplayScroll(scrollDelay, endHeight));
 
         creditsText.text = "";
         creditsScroll.anchoredPosition = original;
