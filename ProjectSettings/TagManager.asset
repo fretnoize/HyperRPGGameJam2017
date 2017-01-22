@@ -6,6 +6,8 @@ TagManager:
   tags:
   - MainMenu
   - Options
+  - SFX
+  - Music
   layers:
   - Default
   - TransparentFX

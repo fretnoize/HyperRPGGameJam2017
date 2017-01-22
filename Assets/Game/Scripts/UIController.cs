@@ -1,97 +1,110 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
-public class UIController : MonoBehaviour {
+namespace Assets.Game.Scripts
+{
+    public class UiController : MonoBehaviour
+    {
+        // menu/options objects
+        static GameObject[] menuObjects;
+        static GameObject[] optionsObjects;
+        static bool optionsMenu;
+        static bool mainMenu;
 
-	// menu/options objects
-	static GameObject[] menuObjects;
-	static GameObject[] optionsObjects;
-	static bool optionsMenu;
-	static bool mainMenu;
+        private bool onMainMenu = true;
 
-	// audio
-	static bool mute;
-	public Slider volumeSlider;
-	//public float volumeS;
-	//public AudioSource volumeAudio;
+        // audio
+        static bool muteAudio;
+        public Slider SfxVolumeSlider;
+        //public float volumeS;
+        //public AudioSource volumeAudio;
 
 
-	void Start () {
-		menuObjects = GameObject.FindGameObjectsWithTag ("MainMenu");
-		optionsObjects = GameObject.FindGameObjectsWithTag ("Options");
+        void Start()
+        {
+            menuObjects = GameObject.FindGameObjectsWithTag("MainMenu");
+            optionsObjects = GameObject.FindGameObjectsWithTag("Options");
 
-		toggleOptions();
+            ToggleOptions();
+        }
 
-		volumeSlider = gameObject.AddComponent<Slider> ();
-		volumeSlider.value = 1f;
+        void Update()
+        {
+            // press esc to open and cose the options menu
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                ToggleOptions();
+            }
+        }
 
-	}
-	
-	void Update () {
-		
-		// press esc to open and cose the options menu
-		if (Input.GetKeyDown (KeyCode.Escape)) {
-			toggleOptions ();
-		}
-	}
+        // removes the menu when the game begins
+        public void LoadGame()
+        {
+            ToggleMenu();
+            this.onMainMenu = false;
+        }
 
-	// removes the menu when the game begins
-	public void LoadGame() {
-		toggleMenu ();
-	}
+        // deactivates the main menu objects, activates the options objects
+        public void Options()
+        {
+            ToggleOptions();
+            ToggleMenu();
+        }
 
-	// deactivates the main menu objects, activates the options objects
-	public void Options() {
-		UIController.toggleOptions ();
-		UIController.toggleMenu ();
-	}
+        // opposite of above
+        public void Back()
+        {
+            ToggleOptions();
+            if (this.onMainMenu)
+            {
+                ToggleMenu();
+            }
+        }
 
-	// opposite of above
-	public void Back() {
-		UIController.toggleOptions ();
-		UIController.toggleMenu ();
-	}
-		
-	// mutes sound
-	public void MuteSound() {
-		if (mute == false) {
-			AudioListener.volume = 0;
-			//volumeSlider.value = 0;
-		} 
-		if (mute == true) {
-			AudioListener.volume = 1f;
-			//volumeSlider.value = 1f;
-		}
+        // mutes sound
+        public void MuteSound()
+        {
+            muteAudio = !muteAudio;
 
-		UIController.mute = !UIController.mute;
-			
-	}
+            if (!muteAudio)
+            {
+                this.AdjustSfxVolume();
+            }
+            else
+            {
+                AudioListener.volume = 0f;
+            }
+        }
 
-	public void Volume() {
-		AudioListener.volume = volumeSlider.value;
-	}
+        public void AdjustSfxVolume()
+        {
+            AudioListener.volume = this.SfxVolumeSlider.value;
+        }
 
-	// exits the game
-	public void exitApplication(){
-		Application.Quit ();
-	}
+        // exits the game
+        public void ExitApplication()
+        {
+            Application.Quit();
+        }
 
-	// avticates/deactivates the options objects
-	private static void toggleOptions() {
-		foreach (GameObject o in optionsObjects) {
-			o.SetActive (optionsMenu);
-		}
-		UIController.optionsMenu = !UIController.optionsMenu;
-	}
+        // avticates/deactivates the options objects
+        private static void ToggleOptions()
+        {
+            foreach (var o in optionsObjects)
+            {
+                o.SetActive(optionsMenu);
+            }
+            optionsMenu = !optionsMenu;
+        }
 
-	// avticates/deactivates the main menu objects
-	private static void toggleMenu() {
-		foreach (GameObject m in menuObjects) {
-			m.SetActive (mainMenu);
-		}
-		UIController.mainMenu = !UIController.mainMenu;
-	}
-
+        // avticates/deactivates the main menu objects
+        private static void ToggleMenu()
+        {
+            foreach (var m in menuObjects)
+            {
+                m.SetActive(mainMenu);
+            }
+            mainMenu = !mainMenu;
+        }
+    }
 }
