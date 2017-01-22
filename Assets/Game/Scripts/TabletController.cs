@@ -13,7 +13,7 @@ namespace Assets.Game.Scripts
         private bool tabletIsUp = false;
 
         private Vector3 startPosition;
-        private readonly Vector3 onScreenPosition = new Vector3(0, -2, 0);
+        private readonly Vector3 onScreenPosition = new Vector3(0, -2, -1);
 
         private float tabletMovementSpeed = 15f;
 
