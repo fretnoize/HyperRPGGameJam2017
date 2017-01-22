@@ -19,7 +19,7 @@ namespace Assets.Game.Scripts
 
         void Update()
         {
-            if (this.animating && UiController.optionsMenu)
+            if (this.animating && UiController.optionsMenu && UiController.mainMenu)
             {
                 this.transform.localScale = Vector3.Lerp(
                     this.startScale,
