@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class CreditsEndAnimation : CreditsTools {
     void Start () {
@@ -29,7 +28,7 @@ public class CreditsEndAnimation : CreditsTools {
             },
             new string[] {
                 "<b>Lead Programmer</b>", "Padarr", "",
-                "<b>Lead Quality Assurance</b>", "Kristal “Lady Kakyuu” Rupard", "Person 2", "",
+                "<b>Lead Quality Assurance</b>", "Kristal “Lady Kakyuu” Rupard"
             },
             new string[] {
                 "<b>Music</b>", "Poor Alexei - ‘Interiors’", "Visager - ‘Village Dreaming’", "Aaron C. Edwards - ‘Don’t Cry’"
@@ -47,13 +46,16 @@ public class CreditsEndAnimation : CreditsTools {
             "<b>Testers</b>", "Person 1", "Person 2", "",
         };
 
+        yield return BlankPause(1.0f);
         yield return StartTyped(linesTyped, 2.0f);
+        yield return BlankPause(1.0f);
         yield return StartFade(linesFade[0], 1.0f, 2.0f);
         yield return StartFade(linesFade[1], 1.0f, 2.0f);
         yield return StartFade(linesFade[2], 1.0f, 2.0f);
         yield return StartFade(linesFade[3], 1.0f, 2.0f);
         yield return StartScroll(linesScroll);
         yield return StartFade(linesFade[4], 1.0f, 2.0f);
+        yield return BlankPause(1.0f);
         creditsText.text = "Thank you for playing and we hope you enjoyed the game.";
     }
 }

@@ -12,18 +12,19 @@ public class CreditsTools : MonoBehaviour {
 
     protected bool running = true;
 
-    protected IEnumerator StartPause(float pauseTime)
+    protected IEnumerator BlankPause(float pauseTime)
     {
+        creditsText.text = "";
         yield return new WaitForSeconds(pauseTime);
     }
 
     /// <summary>
     /// Fade text in and out on the screen
     /// </summary>
-    /// <param name="lines"></param>
-    /// <param name="fadeTime"></param>
-    /// <param name="pauseTime"></param>
-    /// <returns></returns>
+    /// <param name="lines">String array of lines to display.</param>
+    /// <param name="fadeTime">Duration of fade in or out in seconds as float.</param>
+    /// <param name="pauseTime">Duration of the pause once fade in is completed before fading out, in seconds as float/</param>
+    /// <returns>To allow yielding for it to finish.</returns>
     protected IEnumerator StartFade(string[] lines, float fadeTime, float pauseTime)
     {
         string textFade = "";
@@ -115,7 +116,8 @@ public class CreditsTools : MonoBehaviour {
     /// Begin 'typing' text into the credits text.
     /// </summary>
     /// <param name="lines">String array with the lines to be displayed.</param>
-    /// <returns></returns>
+    /// <param name="pauseTime">Time to pause with the finished writing on screen in seconds as a float value.</param>
+    /// <returns>To allow yielding for it to finish.</returns>
     protected IEnumerator StartTyped(string[] lines, float pauseTime)
     {
         yield return StartCoroutine(DisplayTyped(lines, typedDelay));
