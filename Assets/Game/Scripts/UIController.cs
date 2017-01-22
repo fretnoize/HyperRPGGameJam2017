@@ -12,26 +12,32 @@ public class UIController : MonoBehaviour {
 	static bool mainMenu;
 
 	// audio
-	static bool mute;
+	public AudioSource audio;
 	public Slider volumeSlider;
-	//public float volumeS;
-	//public AudioSource volumeAudio;
+	// public AudioSource volumeAudio;
 
 
 	void Start () {
 		menuObjects = GameObject.FindGameObjectsWithTag ("MainMenu");
 		optionsObjects = GameObject.FindGameObjectsWithTag ("Options");
 
+		// if (audio == null)
+		// {
+		// 	audio = GetComponent<AudioSource>();
+		// 	if (audio != null)
+		// 	{
+		// 		Debug.Log("audio not assigned, using first found AudioSource.\n");
+		// 	} else {
+		// 		Debug.LogError("There's no audio! Please add an audio source and assign it to this.\n");
+		// 	}
+		// }
+
 		toggleOptions();
-
-		volumeSlider = gameObject.AddComponent<Slider> ();
-		volumeSlider.value = 1f;
-
 	}
-	
+
 	void Update () {
-		
-		// press esc to open and cose the options menu
+
+		// press esc to open and close the options menu
 		if (Input.GetKeyDown (KeyCode.Escape)) {
 			toggleOptions ();
 		}
@@ -53,24 +59,16 @@ public class UIController : MonoBehaviour {
 		UIController.toggleOptions ();
 		UIController.toggleMenu ();
 	}
-		
+
 	// mutes sound
 	public void MuteSound() {
-		if (mute == false) {
-			AudioListener.volume = 0;
-			//volumeSlider.value = 0;
-		} 
-		if (mute == true) {
-			AudioListener.volume = 1f;
-			//volumeSlider.value = 1f;
-		}
-
-		UIController.mute = !UIController.mute;
-			
+		audio.mute = !audio.mute;
 	}
 
-	public void Volume() {
-		AudioListener.volume = volumeSlider.value;
+	// controls volume
+	public void VolumeController() {
+		// volumeSlider.value = volumeAudio.volume;
+		audio.volume = volumeSlider.normalizedValue;
 	}
 
 	// exits the game
