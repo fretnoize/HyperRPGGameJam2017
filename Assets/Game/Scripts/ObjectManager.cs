@@ -18,7 +18,7 @@ namespace Assets.Game.Scripts
             {
                 var disc = GameObject.Instantiate(
                     this.DiscPrefab,
-                    new Vector3(Random.Range(-45, 45), Random.Range(-4.5f, -3), -1),
+                    new Vector3(Random.Range(-38, 38), Random.Range(-4.5f, -3), -1),
                     Quaternion.identity);
                 disc.name = "Disc " + i;
                 disc.parent = this.DiscFolder.transform;
