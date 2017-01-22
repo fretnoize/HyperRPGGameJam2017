@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Game.Scripts
@@ -79,7 +80,9 @@ namespace Assets.Game.Scripts
 
         public void AdjustSfxVolume()
         {
-            AudioListener.volume = this.SfxVolumeSlider.value;
+            if (!muteAudio) {
+                AudioListener.volume = this.SfxVolumeSlider.value;
+            }
         }
 
         // exits the game
