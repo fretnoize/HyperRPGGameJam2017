@@ -1,4 +1,4 @@
-﻿// seem unessecary
+﻿// seem unnecessary
 // using System.Collections;
 // using System.Collections.Generic;
 using UnityEngine;
