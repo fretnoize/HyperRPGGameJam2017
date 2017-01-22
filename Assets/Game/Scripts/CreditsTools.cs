@@ -20,6 +20,8 @@ public class CreditsTools : MonoBehaviour {
         Vector2 original = creditsScroll.anchoredPosition;
         creditsScroll.anchoredPosition = new Vector2(0, -400);
 
+        float disappearHeight = 750;
+
         string textScroll = "";
         for (int i=0; i<lines.Length; i++)
         {
@@ -28,7 +30,7 @@ public class CreditsTools : MonoBehaviour {
 
         creditsText.text = textScroll;
 
-        yield return StartCoroutine(DisplayScroll(scrollDelay, 750));
+        yield return StartCoroutine(DisplayScroll(scrollDelay, disappearHeight));
 
         creditsText.text = "";
         creditsScroll.anchoredPosition = original;

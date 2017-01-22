@@ -9,9 +9,9 @@ public class CreditsAnimation : CreditsTools {
     }
 
     void Update () {
-        if ()
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-
+            // TODO something to exit the menu
         }
     }
 	
