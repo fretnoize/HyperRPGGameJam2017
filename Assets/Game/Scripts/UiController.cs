@@ -8,8 +8,8 @@ namespace Assets.Game.Scripts
         // menu/options objects
         static GameObject[] menuObjects;
         static GameObject[] optionsObjects;
-        static bool optionsMenu;
-        static bool mainMenu;
+        public static bool optionsMenu;
+        public static bool mainMenu;
 
         private bool onMainMenu = true;
 

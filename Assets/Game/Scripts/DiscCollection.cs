@@ -19,7 +19,7 @@ namespace Assets.Game.Scripts
 
         void Update()
         {
-            if (this.animating)
+            if (this.animating && UiController.optionsMenu)
             {
                 this.transform.localScale = Vector3.Lerp(
                     this.startScale,
@@ -35,7 +35,7 @@ namespace Assets.Game.Scripts
 
         void OnMouseDown()
         {
-            if (!this.animating)
+            if (!this.animating && UiController.optionsMenu && UiController.mainMenu)
             {
                 this.startTime = Time.time;
                 this.animating = true;

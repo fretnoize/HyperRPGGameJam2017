@@ -29,6 +29,12 @@ namespace Assets.Game.Scripts
         // So that the player or any other objects have moved and updated
         void LateUpdate ()
         {
+            // early exit for when paused
+            if (!UiController.optionsMenu || !UiController.mainMenu)
+            {
+                return;
+            }
+
             // seems a more general form of getting "left/right" user input. Both arrow keys and WASD
             var moveHorizontal = Input.GetAxis ("Horizontal");
 
