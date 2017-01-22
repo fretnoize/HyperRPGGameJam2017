@@ -31,7 +31,7 @@ namespace Assets.Game.Scripts
         void Update()
         {
 
-            // press esc to open and cose the options menu
+            // press esc to open and close the options menu
             if (!this.onMainMenu && Input.GetKeyDown(KeyCode.Escape))
             {
                 ToggleOptions();
@@ -88,7 +88,7 @@ namespace Assets.Game.Scripts
             Application.Quit();
         }
 
-        // avticates/deactivates the options objects
+        // activates/deactivates the options objects
         private static void ToggleOptions()
         {
             foreach (var o in optionsObjects)
@@ -98,7 +98,7 @@ namespace Assets.Game.Scripts
             optionsMenu = !optionsMenu;
         }
 
-        // avticates/deactivates the main menu objects
+        // activates/deactivates the main menu objects
         private static void ToggleMenu()
         {
             foreach (var m in menuObjects)
