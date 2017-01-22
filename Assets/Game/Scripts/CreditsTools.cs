@@ -60,8 +60,6 @@ public class CreditsTools : MonoBehaviour {
             float a = start + ((end - start) * (i / intervals));
             creditsText.color = new Color(r, g, b, a);
         }
-
-        yield return 0;
     }
 
     /// <summary>
@@ -106,8 +104,6 @@ public class CreditsTools : MonoBehaviour {
             creditsScroll.anchoredPosition += Vector2.up;
             yield return new WaitForSeconds(speed);
         }
-
-        yield return 0;
     }
 
     /// <summary>
@@ -115,9 +111,11 @@ public class CreditsTools : MonoBehaviour {
     /// </summary>
     /// <param name="lines">String array with the lines to be displayed.</param>
     /// <returns></returns>
-    protected IEnumerator StartTyped(string[] lines)
+    protected IEnumerator StartTyped(string[] lines, float pauseTime)
     {
         yield return StartCoroutine(DisplayTyped(lines, typedDelay));
+        yield return new WaitForSeconds(pauseTime);
+        creditsText.text = "";
     }
 
     IEnumerator DisplayTyped(string[] lines, float delay)
@@ -144,8 +142,6 @@ public class CreditsTools : MonoBehaviour {
             creditsText.text = text + lines[stringIndex].Substring(0, characterIndex); ;
             characterIndex++;
         }
-
-        yield return 0;
     }
 
 }
