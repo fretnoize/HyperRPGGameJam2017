@@ -77,7 +77,7 @@ public class UIController : MonoBehaviour {
 	public void exitApplication(){
 		Application.Quit ();
 	}
-		
+
 	// avticates/deactivates the options objects
 	private static void toggleOptions() {
 		foreach (GameObject o in optionsObjects) {
