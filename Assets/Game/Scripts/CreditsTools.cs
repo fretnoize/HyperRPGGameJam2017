@@ -12,14 +12,9 @@ public class CreditsTools : MonoBehaviour {
 
     protected bool running = true;
 
-    protected void TextShow()
+    protected IEnumerator StartPause(float pauseTime)
     {
-        creditsText.color = new Color(creditsText.color.r, creditsText.color.g, creditsText.color.b, 1.0f);
-    }
-
-    protected void TextHide()
-    {
-        creditsText.color = new Color(creditsText.color.r, creditsText.color.g, creditsText.color.b, 1.0f);
+        yield return new WaitForSeconds(pauseTime);
     }
 
     /// <summary>
@@ -44,6 +39,16 @@ public class CreditsTools : MonoBehaviour {
         yield return StartCoroutine(DisplayFade(1.0f, 0.0f, floatIntervals, fadeTime));
         creditsText.text = "";
         TextShow();
+    }
+
+    void TextShow()
+    {
+        creditsText.color = new Color(creditsText.color.r, creditsText.color.g, creditsText.color.b, 1.0f);
+    }
+
+    void TextHide()
+    {
+        creditsText.color = new Color(creditsText.color.r, creditsText.color.g, creditsText.color.b, 0.0f);
     }
 
     IEnumerator DisplayFade(float start, float end, float intervals, float time)
