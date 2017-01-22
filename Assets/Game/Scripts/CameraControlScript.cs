@@ -12,10 +12,19 @@ public class CameraControlScript : MonoBehaviour
 	public SpriteRenderer backdrop;
 
 	// Use this for initialization
-	/*void Start ()
+	private void Start ()
 	{
-
-	}*/
+		// debugging in case of a missing backdrop texture
+		if (backdrop == null) {
+            backdrop = FindObjectOfType<SpriteRenderer>();
+            if (backdrop != null) {
+                Debug.Log("backdrop not assigned, using first found SpriteRenderer.\n");
+            }
+            else {
+                Debug.LogError("There's no backdrop! Please add a backdrop and assign it to this.\n");
+            }
+		}
+	}
 
 	// LateUpdate is called once per frame, after all items have been processed in `Update`
 	// So that the player or any other objects have moved and updated
