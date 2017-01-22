@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace Assets.Game.Scripts
 {
@@ -112,7 +112,7 @@ namespace Assets.Game.Scripts
 
         private void SpinPuzzle(Vector3 rotation)
         {
-            this.transform.Rotate(rotation);
+            this.transform.Rotate(rotation, Space.World);
 
             if (!this.nonRotatingCubes.isOn)
             {
@@ -127,7 +127,7 @@ namespace Assets.Game.Scripts
         {
             if (this.mouseDown)
             {
-                var rotation = new Vector3(Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0) * Time.deltaTime * this.speed;
+                var rotation = new Vector3(Input.GetAxis("Mouse Y"), -Input.GetAxis("Mouse X"), 0) * Time.deltaTime * this.speed;
                 this.SpinPuzzle(rotation);
             }
 
