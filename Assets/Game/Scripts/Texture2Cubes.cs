@@ -11,20 +11,9 @@ namespace Assets.Game.Scripts
     public class Texture2Cubes : MonoBehaviour
     {
 
-        // temp controls
-        public Toggle nonRotatingCubes;
+        public float solvedThreshold = 2f;
 
-        public Toggle lockPuzzle;
-
-        public Button spinPuzzle;
-
-        public Slider solvedThresholdSlider;
-
-        public Text statusText;
-
-        private float solvedThreshold;
-
-        public Texture2D texture2D;
+        public Texture2D[] texture2D = new Texture2D[4];
         public GameObject prefab;
         public float speed = 500.0f;
 
@@ -49,17 +38,21 @@ namespace Assets.Game.Scripts
 
         private void Awake()
         {
-            startMarkerLocation = StartMarker.transform.position;
-            Destroy(StartMarker);
-            Destroy(DestinationMarker);
+//            startMarkerLocation = StartMarker.transform.position;
+//            Destroy(StartMarker);
+//            Destroy(DestinationMarker);
         }
         // Use this for initialization
         void Start()
         {
-            this.spinPuzzle.onClick.AddListener(SpinPuzzle);
-            var pixels = this.texture2D.GetPixels();
-            var width = this.texture2D.width;
-            var height = this.texture2D.height;
+            var textureIndex = 0;
+            if (PlayerPrefs.HasKey("CurrentItem"))
+            {
+                textureIndex = PlayerPrefs.GetInt("CurrentItem");
+            }
+            var pixels = this.texture2D[textureIndex].GetPixels();
+            var width = this.texture2D[textureIndex].width;
+            var height = this.texture2D[textureIndex].height;
 
             var x = 0f;
             var y = 0f;
@@ -93,8 +86,8 @@ namespace Assets.Game.Scripts
                     var cubeRenderer = cube.GetComponent<Renderer>();
                     cubeRenderer.material.color = currColor;
                     cubes++;
-                    cube.GetComponent<PixelCube>().SetStart(startMarkerLocation, StartArea, MinFormTime, MaxFormTime, cubeFolder.transform);
-                    cube.transform.parent = null;
+//                    cube.GetComponent<PixelCube>().SetStart(startMarkerLocation, StartArea, MinFormTime, MaxFormTime, cubeFolder.transform);
+//                    cube.transform.parent = null;
                     minX = Math.Min(x, minX);
                     minY = Math.Min(y, minY);
                     minZ = Math.Min(z, minZ);
@@ -117,8 +110,6 @@ namespace Assets.Game.Scripts
             myCollider.size = new Vector3(maxX - minX + 1, maxY - minY + 1, maxZ - minZ + 1);
             Debug.Log(cubes + " cubes created.");
 
-            this.solvedThreshold = this.solvedThresholdSlider.value;
-            this.solvedThresholdSlider.onValueChanged.AddListener(this.UpdateSliderValue);
             SpinPuzzle();
         }
 
@@ -136,14 +127,6 @@ namespace Assets.Game.Scripts
         private void SpinPuzzle(Vector3 rotation)
         {
             this.transform.Rotate(rotation, Space.World);
-
-            if (!this.nonRotatingCubes.isOn)
-            {
-                foreach (Transform component in this.cubeFolder.transform)
-                {
-                    component.rotation = Quaternion.identity;
-                }
-            }
         }
 
         void Update()
@@ -183,21 +166,13 @@ namespace Assets.Game.Scripts
 
             if (this.puzzleSolved)
             {
-                this.statusText.text = "Status: solved";
-            }
-            else
-            {
-                this.statusText.text = "Status: NOT solved";
+
             }
         }
 
         void OnMouseDown()
         {
             this.mouseDown = true;
-            if (this.lockPuzzle.isOn)
-            {
-                this.mouseDown = false;
-            }
             Debug.Log("The mouse is down on the collider.");
         }
 
