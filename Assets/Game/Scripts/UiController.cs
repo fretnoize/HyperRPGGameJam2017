@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 namespace Assets.Game.Scripts
 {
+    using UnityEngine.SceneManagement;
+
     public class UiController : MonoBehaviour
     {
         // menu/options objects
@@ -30,9 +32,9 @@ namespace Assets.Game.Scripts
             ToggleOptions();
         }
 
+
         void Update()
         {
-
             // press esc to open and close the options menu
             if (!this.onMainMenu && Input.GetKeyDown(KeyCode.Escape))
             {
@@ -105,6 +107,7 @@ namespace Assets.Game.Scripts
         // activates/deactivates the main menu objects
         private static void ToggleMenu()
         {
+            Debug.Log("Menu");
             foreach (var m in menuObjects)
             {
                 m.SetActive(mainMenu);

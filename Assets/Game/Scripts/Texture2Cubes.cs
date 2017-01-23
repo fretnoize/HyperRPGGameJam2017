@@ -17,11 +17,11 @@ namespace Assets.Game.Scripts
         public GameObject prefab;
         public float speed = 500.0f;
 
-        [Tooltip ("Destination is just a visual aid, keep at 0,0,0")]
+        [Tooltip("Destination is just a visual aid, keep at 0,0,0")]
         public GameObject DestinationMarker;
-        [Tooltip ("Center of horizontal plane PixelCubes spawn at")]
+        [Tooltip("Center of horizontal plane PixelCubes spawn at")]
         public GameObject StartMarker;
-        [Tooltip ("Length and depth of the area PixelCubes can randomly spawn")]
+        [Tooltip("Length and depth of the area PixelCubes can randomly spawn")]
         public float StartArea;
 
         public float MinFormTime, MaxFormTime;
@@ -32,15 +32,13 @@ namespace Assets.Game.Scripts
 
         private bool puzzleSolved = false;
 
-        private readonly Random random = new Random();
-
         private GameObject cubeFolder;
 
         private void Awake()
         {
-//            startMarkerLocation = StartMarker.transform.position;
-//            Destroy(StartMarker);
-//            Destroy(DestinationMarker);
+            //            startMarkerLocation = StartMarker.transform.position;
+            //            Destroy(StartMarker);
+            //            Destroy(DestinationMarker);
         }
         // Use this for initialization
         void Start()
@@ -76,9 +74,9 @@ namespace Assets.Game.Scripts
                 if (!(Math.Abs(currColor.a) < 0.001f))
                 {
                     var z = Random.Range(0f, depth);
-                    var cube = Instantiate(this.prefab, 
-                        new Vector3(-1 * (width / 2) + x + 1.5f, 
-                        -1 * (height / 2) + y - 2.5f, 
+                    var cube = Instantiate(this.prefab,
+                        new Vector3(-1 * (width / 2) + x + 1.5f,
+                        -1 * (height / 2) + y - 2.5f,
                         -1 * Convert.ToSingle(depth / 2) + z), Quaternion.identity);
 
                     cube.name = "Cube (" + x + ", " + y + ")";
@@ -86,8 +84,8 @@ namespace Assets.Game.Scripts
                     var cubeRenderer = cube.GetComponent<Renderer>();
                     cubeRenderer.material.color = currColor;
                     cubes++;
-//                    cube.GetComponent<PixelCube>().SetStart(startMarkerLocation, StartArea, MinFormTime, MaxFormTime, cubeFolder.transform);
-//                    cube.transform.parent = null;
+                    //                    cube.GetComponent<PixelCube>().SetStart(startMarkerLocation, StartArea, MinFormTime, MaxFormTime, cubeFolder.transform);
+                    //                    cube.transform.parent = null;
                     minX = Math.Min(x, minX);
                     minY = Math.Min(y, minY);
                     minZ = Math.Min(z, minZ);
@@ -111,11 +109,6 @@ namespace Assets.Game.Scripts
             Debug.Log(cubes + " cubes created.");
 
             SpinPuzzle();
-        }
-
-        private void UpdateSliderValue(float arg0)
-        {
-            this.solvedThreshold = arg0;
         }
 
         private void SpinPuzzle()
@@ -163,11 +156,33 @@ namespace Assets.Game.Scripts
             {
                 this.puzzleSolved = false;
             }
+        }
 
-            if (this.puzzleSolved)
+        public bool isPuzzleSolved()
+        {
+            return this.puzzleSolved;
+        }
+
+        public float completionCloseness()
+        {
+            var x = Math.Abs(this.transform.rotation.eulerAngles.x);
+            var y = Math.Abs(this.transform.rotation.eulerAngles.y);
+
+            while (x >= 180)
             {
-
+                x -= 180f;
             }
+            while (y >= 180f)
+            {
+                y -= 180f;
+            }
+
+            var xDiff = Math.Min(x, (180 - x));
+            var yDiff = Math.Min(y, (180 - y));
+
+            var result = (xDiff + yDiff) / 360 * 2;
+
+            return result;
         }
 
         void OnMouseDown()
