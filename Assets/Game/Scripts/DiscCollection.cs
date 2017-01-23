@@ -2,6 +2,8 @@
 
 namespace Assets.Game.Scripts
 {
+    using UnityEngine.SceneManagement;
+
     public class DiscCollection : MonoBehaviour
     {
         private bool animating = false;
@@ -28,7 +30,7 @@ namespace Assets.Game.Scripts
 
                 if (Time.time >= this.startTime + this.lerpLength)
                 {
-                    Destroy(this.gameObject, 1);
+                    SceneManager.LoadScene("Puzzle Demo");
                 }
             }
         }
