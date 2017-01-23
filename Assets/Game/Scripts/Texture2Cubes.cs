@@ -45,7 +45,7 @@ namespace Assets.Game.Scripts
         // Use this for initialization
         void Start()
         {
-            var textureIndex = textNum;
+            var textureIndex = ObjectManager.CurrentDisc; // textNum;
             //if (PlayerPrefs.HasKey("CurrentItem"))
             //{
             //    textureIndex = PlayerPrefs.GetInt("CurrentItem");

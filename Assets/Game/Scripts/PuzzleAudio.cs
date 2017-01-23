@@ -22,7 +22,7 @@ namespace Assets.Game.Scripts
 
         void Start()
         {
-            var audioIndex = audioNum;
+            var audioIndex = ObjectManager.CurrentDisc;//audioNum;
             //if (PlayerPrefs.HasKey("CurrentItem"))
             //{
             //    audioIndex = PlayerPrefs.GetInt("CurrentItem");

@@ -38,24 +38,24 @@ namespace Assets.Game.Scripts
                         Debug.LogError("Hey, i don't know anything more than 4 discs");
                         return;
                     }
-                    Debug.Log("Current disc: " + ObjectManager.CurrentDisc + "\n");
-                    switch (ObjectManager.CurrentDisc)
-                    {
-                        case 0:
-                            SceneManager.LoadScene("Puzzle Demo");
-                            break;
-                        case 1:
-                            SceneManager.LoadScene("Puzzle Demo1");
-                            break;
-                        case 2:
-                            SceneManager.LoadScene("Puzzle Demo2");
-                            break;
-                        case 3:
-                            SceneManager.LoadScene("Puzzle Demo3");
-                            break;
-                    }
+                    //Debug.Log("Current disc: " + ObjectManager.CurrentDisc + "\n");
+                    //switch (ObjectManager.CurrentDisc)
+                    //{
+                    //    case 0:
+                    //        SceneManager.LoadScene("Puzzle Demo");
+                    //        break;
+                    //    case 1:
+                    //        SceneManager.LoadScene("Puzzle Demo1");
+                    //        break;
+                    //    case 2:
+                    //        SceneManager.LoadScene("Puzzle Demo2");
+                    //        break;
+                    //    case 3:
+                    //        SceneManager.LoadScene("Puzzle Demo3");
+                    //        break;
+                    //}
 
-                    //SceneManager.LoadScene("Puzzle Demo");
+                    SceneManager.LoadScene("Puzzle Demo");
                     
                     DestroyObject(this.gameObject);
                 }

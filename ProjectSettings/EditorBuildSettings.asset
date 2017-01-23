@@ -9,9 +9,9 @@ EditorBuildSettings:
     path: Assets/Game/Scenes/Main Scene.unity
   - enabled: 1
     path: Assets/Game/Scenes/Puzzle Demo.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Game/Scenes/Puzzle Demo3.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Game/Scenes/Puzzle Demo2.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Game/Scenes/Puzzle Demo1.unity
