@@ -2,6 +2,8 @@
 
 namespace Assets.Game.Scripts
 {
+    using System;
+
     public class DiscCollection : MonoBehaviour
     {
         private bool animating = false;
@@ -9,7 +11,11 @@ namespace Assets.Game.Scripts
         private float lerpLength = 2f;
         private Vector3 startScale;
 
+        public ObjectManager objectManager;
+
         private float startTime;
+
+        private bool ripObject = false;
 
         // Use this for initialization
         void Start()
@@ -26,9 +32,10 @@ namespace Assets.Game.Scripts
                     this.startScale * 2,
                     (Time.time - this.startTime) / this.lerpLength);
 
-                if (Time.time >= this.startTime + this.lerpLength)
+                if (Time.time >= this.startTime + this.lerpLength && !this.ripObject)
                 {
-                    Destroy(this.gameObject, 1);
+                    this.ripObject = true;
+                    this.objectManager.removeDisc(this);
                 }
             }
         }
