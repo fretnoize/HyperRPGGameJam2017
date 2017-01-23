@@ -29,21 +29,18 @@ namespace Assets.Game.Scripts
             //PlayerPrefs.DeleteAll();
             menuObjects = GameObject.FindGameObjectsWithTag("MainMenu");
             optionsObjects = GameObject.FindGameObjectsWithTag("Options");
-            if (ObjectManager.CurrentDisc > 0)
-            {
-                //TODO this kills the ability to use the escape key to open the options menu
-                //it'd be nice to have this fixed... it'd be nice...
-                foreach (GameObject ob in menuObjects)
-                {
-                    ob.SetActive(false);
-                }
-                foreach (GameObject ob in optionsObjects)
-                {
-                    ob.SetActive(false);
-                }
-                return;
-            }
-            ToggleOptions();
+			if (ObjectManager.CurrentDisc > 0) {
+				this.onMainMenu = false;
+				foreach (GameObject ob in menuObjects) {
+					ob.SetActive (false);
+				}
+				foreach (GameObject ob in optionsObjects) {
+					ob.SetActive (false);
+				}
+				return;
+			} else {
+				ToggleOptions ();
+			}
         }
 
 
