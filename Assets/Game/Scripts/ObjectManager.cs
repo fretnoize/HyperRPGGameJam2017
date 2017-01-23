@@ -22,12 +22,20 @@ namespace Assets.Game.Scripts
                     Quaternion.identity);
                 disc.name = "Disc " + i;
                 disc.parent = this.DiscFolder.transform;
+            if (PlayerPrefs.HasKey("CurrentItem"))
+            {
+                PlayerPrefs.SetInt("CurrentItem", PlayerPrefs.GetInt("CurrentItem") + 1);
             }
-        }
-
-        public int GetAvailableDiscCount()
-        {
-            return this.DiscFolder.childCount;
+            else
+            {
+                PlayerPrefs.SetInt("CurrentItem", 0);
+            }
+            this.DiscFolder.transform.parent = this.transform;
+            var disc = GameObject.Instantiate(
+                this.DiscPrefab,
+                new Vector3(Random.Range(-38, 38), Random.Range(-4.5f, -3), -1),
+                Quaternion.identity);
+            disc.parent = this.DiscFolder.transform;
         }
     }
 }

@@ -4,21 +4,24 @@ namespace Assets.Game.Scripts
 {
     using System;
 
+    using UnityEngine.UI;
+
     using Random = UnityEngine.Random;
 
     public class Texture2Cubes : MonoBehaviour
     {
-        private float solvedThreshold = 2.5f;
 
-        public Texture2D texture2D;
+        public float solvedThreshold = 2f;
+
+        public Texture2D[] texture2D = new Texture2D[4];
         public GameObject prefab;
         public float speed = 500.0f;
 
-        [Tooltip("Destination is just a visual aid, keep at 0,0,0")]
+        [Tooltip ("Destination is just a visual aid, keep at 0,0,0")]
         public GameObject DestinationMarker;
-        [Tooltip("Center of horizontal plane PixelCubes spawn at")]
+        [Tooltip ("Center of horizontal plane PixelCubes spawn at")]
         public GameObject StartMarker;
-        [Tooltip("Length and depth of the area PixelCubes can randomly spawn")]
+        [Tooltip ("Length and depth of the area PixelCubes can randomly spawn")]
         public float StartArea;
 
         public float MinFormTime, MaxFormTime;
@@ -29,20 +32,27 @@ namespace Assets.Game.Scripts
 
         private bool puzzleSolved = false;
 
+        private readonly Random random = new Random();
+
         private GameObject cubeFolder;
 
         private void Awake()
         {
-            this.startMarkerLocation = this.StartMarker.transform.position;
-            Destroy(this.StartMarker);
-            Destroy(this.DestinationMarker);
+//            startMarkerLocation = StartMarker.transform.position;
+//            Destroy(StartMarker);
+//            Destroy(DestinationMarker);
         }
         // Use this for initialization
         void Start()
         {
-            var pixels = this.texture2D.GetPixels();
-            var width = this.texture2D.width;
-            var height = this.texture2D.height;
+            var textureIndex = 0;
+            if (PlayerPrefs.HasKey("CurrentItem"))
+            {
+                textureIndex = PlayerPrefs.GetInt("CurrentItem");
+            }
+            var pixels = this.texture2D[textureIndex].GetPixels();
+            var width = this.texture2D[textureIndex].width;
+            var height = this.texture2D[textureIndex].height;
 
             var x = 0f;
             var y = 0f;
@@ -66,9 +76,9 @@ namespace Assets.Game.Scripts
                 if (!(Math.Abs(currColor.a) < 0.001f))
                 {
                     var z = Random.Range(0f, depth);
-                    var cube = Instantiate(this.prefab,
-                        new Vector3(-1 * (width / 2) + x + 1.5f,
-                        -1 * (height / 2) + y - 2.5f,
+                    var cube = Instantiate(this.prefab, 
+                        new Vector3(-1 * (width / 2) + x + 1.5f, 
+                        -1 * (height / 2) + y - 2.5f, 
                         -1 * Convert.ToSingle(depth / 2) + z), Quaternion.identity);
 
                     cube.name = "Cube (" + x + ", " + y + ")";
@@ -76,8 +86,8 @@ namespace Assets.Game.Scripts
                     var cubeRenderer = cube.GetComponent<Renderer>();
                     cubeRenderer.material.color = currColor;
                     cubes++;
-                    cube.GetComponent<PixelCube>().SetStart(this.startMarkerLocation, this.StartArea, this.MinFormTime, this.MaxFormTime, this.cubeFolder.transform);
-                    cube.transform.parent = null;
+//                    cube.GetComponent<PixelCube>().SetStart(startMarkerLocation, StartArea, MinFormTime, MaxFormTime, cubeFolder.transform);
+//                    cube.transform.parent = null;
                     minX = Math.Min(x, minX);
                     minY = Math.Min(y, minY);
                     minZ = Math.Min(z, minZ);
@@ -100,7 +110,12 @@ namespace Assets.Game.Scripts
             myCollider.size = new Vector3(maxX - minX + 1, maxY - minY + 1, maxZ - minZ + 1);
             Debug.Log(cubes + " cubes created.");
 
-            this.SpinPuzzle();
+            SpinPuzzle();
+        }
+
+        private void UpdateSliderValue(float arg0)
+        {
+            this.solvedThreshold = arg0;
         }
 
         private void SpinPuzzle()
@@ -112,11 +127,6 @@ namespace Assets.Game.Scripts
         private void SpinPuzzle(Vector3 rotation)
         {
             this.transform.Rotate(rotation, Space.World);
-
-            foreach (Transform component in this.cubeFolder.transform)
-            {
-                component.rotation = Quaternion.identity;
-            }
         }
 
         void Update()
@@ -156,18 +166,20 @@ namespace Assets.Game.Scripts
 
             if (this.puzzleSolved)
             {
-                Debug.Log("The puzzle is done.");
+
             }
         }
 
         void OnMouseDown()
         {
             this.mouseDown = true;
+            Debug.Log("The mouse is down on the collider.");
         }
 
         void OnMouseUp()
         {
             this.mouseDown = false;
+            Debug.Log("The mouse is up on the collider.");
         }
     }
 }

@@ -23,6 +23,7 @@ namespace Assets.Game.Scripts
 
         void Start()
         {
+            PlayerPrefs.DeleteAll();
             menuObjects = GameObject.FindGameObjectsWithTag("MainMenu");
             optionsObjects = GameObject.FindGameObjectsWithTag("Options");
 

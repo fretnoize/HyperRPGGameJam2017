@@ -7,3 +7,5 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Game/Scenes/Main Scene.unity
+  - enabled: 1
+    path: Assets/Game/Scenes/Puzzle Demo.unity
