@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace Assets.Game.Scripts
 {
@@ -10,17 +10,23 @@ namespace Assets.Game.Scripts
         [Range(0, 10)]
         public int NumberOfDiscs = 4;
 
+        
+        public static int CurrentDisc = 0;
+        //private int currentDisc = 0;
+
         // Use this for initialization
         void Start()
         {
-            if (PlayerPrefs.HasKey("CurrentItem"))
-            {
-                PlayerPrefs.SetInt("CurrentItem", PlayerPrefs.GetInt("CurrentItem") + 1);
-            }
-            else
-            {
-                PlayerPrefs.SetInt("CurrentItem", 0);
-            }
+            //PlayerPrefs
+            DontDestroyOnLoad(this.gameObject);
+            //if (PlayerPrefs.HasKey("CurrentItem"))
+            //{
+            //    PlayerPrefs.SetInt("CurrentItem", PlayerPrefs.GetInt("CurrentItem") + 1);
+            //}
+            //else
+            //{
+            //    PlayerPrefs.SetInt("CurrentItem", 0);
+            //}
             this.DiscFolder.transform.parent = this.transform;
             var disc = GameObject.Instantiate(
                 this.DiscPrefab,

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace Assets.Game.Scripts
 {
@@ -12,6 +12,8 @@ namespace Assets.Game.Scripts
         private Vector3 startScale;
 
         private float startTime;
+
+        private bool levelLoaded = true;
 
         // Use this for initialization
         void Start()
@@ -30,7 +32,32 @@ namespace Assets.Game.Scripts
 
                 if (Time.time >= this.startTime + this.lerpLength)
                 {
-                    SceneManager.LoadScene("Puzzle Demo");
+                    levelLoaded = true;
+                    if (ObjectManager.CurrentDisc > 3)
+                    {
+                        Debug.LogError("Hey, i don't know anything more than 4 discs");
+                        return;
+                    }
+                    Debug.Log("Current disc: " + ObjectManager.CurrentDisc + "\n");
+                    switch (ObjectManager.CurrentDisc)
+                    {
+                        case 0:
+                            SceneManager.LoadScene("Puzzle Demo");
+                            break;
+                        case 1:
+                            SceneManager.LoadScene("Puzzle Demo1");
+                            break;
+                        case 2:
+                            SceneManager.LoadScene("Puzzle Demo2");
+                            break;
+                        case 3:
+                            SceneManager.LoadScene("Puzzle Demo3");
+                            break;
+                    }
+
+                    //SceneManager.LoadScene("Puzzle Demo");
+                    
+                    DestroyObject(this.gameObject);
                 }
             }
         }
@@ -41,6 +68,7 @@ namespace Assets.Game.Scripts
             {
                 this.startTime = Time.time;
                 this.animating = true;
+                levelLoaded = false;
             }
         }
     }

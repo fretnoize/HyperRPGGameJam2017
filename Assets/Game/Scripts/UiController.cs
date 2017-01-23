@@ -1,4 +1,4 @@
-﻿
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,7 +25,7 @@ namespace Assets.Game.Scripts
 
         void Start()
         {
-            PlayerPrefs.DeleteAll();
+            //PlayerPrefs.DeleteAll();
             menuObjects = GameObject.FindGameObjectsWithTag("MainMenu");
             optionsObjects = GameObject.FindGameObjectsWithTag("Options");
 

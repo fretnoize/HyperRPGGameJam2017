@@ -660,7 +660,7 @@ MonoBehaviour:
   StartArea: 100
   MinFormTime: 3
   MaxFormTime: 10
-  textNum: 0
+  textNum: 3
 --- !u!4 &2050564652
 Transform:
   m_ObjectHideFlags: 0

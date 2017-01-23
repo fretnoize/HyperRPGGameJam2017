@@ -46,10 +46,10 @@ namespace Assets.Game.Scripts
         void Start()
         {
             var textureIndex = textNum;
-            if (PlayerPrefs.HasKey("CurrentItem"))
-            {
-                textureIndex = PlayerPrefs.GetInt("CurrentItem");
-            }
+            //if (PlayerPrefs.HasKey("CurrentItem"))
+            //{
+            //    textureIndex = PlayerPrefs.GetInt("CurrentItem");
+            //}
             var pixels = this.texture2D[textureIndex].GetPixels();
             var width = this.texture2D[textureIndex].width;
             var height = this.texture2D[textureIndex].height;

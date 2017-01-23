@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace Assets.Game.Scripts
 {
@@ -12,6 +12,8 @@ namespace Assets.Game.Scripts
 
         public AudioClip[] audioClips = new AudioClip[4];
 
+        public int audioNum;
+
         public Transform Texture2CubesINeed;
 
         private Texture2Cubes texture2Cubes;
@@ -20,11 +22,11 @@ namespace Assets.Game.Scripts
 
         void Start()
         {
-            var audioIndex = 0;
-            if (PlayerPrefs.HasKey("CurrentItem"))
-            {
-                audioIndex = PlayerPrefs.GetInt("CurrentItem");
-            }
+            var audioIndex = audioNum;
+            //if (PlayerPrefs.HasKey("CurrentItem"))
+            //{
+            //    audioIndex = PlayerPrefs.GetInt("CurrentItem");
+            //}
 
             var availableSources = this.GetComponents(typeof(AudioSource));
             this.voAudioSource = availableSources[0] as AudioSource;
@@ -92,6 +94,7 @@ namespace Assets.Game.Scripts
                 if (!this.voAudioSource.isPlaying)
                 {
                     SceneManager.LoadScene("Main Scene");
+                    ObjectManager.CurrentDisc++;
                 }
             }
         }
