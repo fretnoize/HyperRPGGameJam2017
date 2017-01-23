@@ -37,6 +37,9 @@ namespace Assets.Game.Scripts
 				foreach (GameObject ob in optionsObjects) {
 					ob.SetActive (false);
 				}
+
+				this.SfxVolumeSlider.value = AudioListener.volume;
+
 				return;
 			} else {
 				ToggleOptions ();
