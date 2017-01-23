@@ -7,7 +7,6 @@ namespace Assets.Game.Scripts
     using UnityEngine.UI;
 
     using System.Collections;
-    using System.Runtime.CompilerServices;
 
     using Random = UnityEngine.Random;
 
