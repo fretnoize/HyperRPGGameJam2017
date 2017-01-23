@@ -7,6 +7,7 @@ namespace Assets.Game.Scripts
     using UnityEngine.UI;
 
     using System.Collections;
+    using System.Runtime.CompilerServices;
 
     using Random = UnityEngine.Random;
 
@@ -37,6 +38,15 @@ namespace Assets.Game.Scripts
         private GameObject cubeFolder;
 
         public int textNum;
+
+        // lerping for orientation
+        private Quaternion rotationStart;
+
+        private Quaternion rotationTarget;
+
+        private float startLerpTime;
+
+        private bool rotationComplete = true;
 
         private void Awake()
         {
@@ -77,7 +87,18 @@ namespace Assets.Game.Scripts
                 this.SpinPuzzle(rotation);
             }
 
-            this.CheckSolved();
+            if (!this.puzzleSolved)
+            {
+                this.CheckSolved();
+            }
+            else if (!this.rotationComplete)
+            {
+                var angle = Quaternion.Angle(this.rotationStart, this.rotationTarget);
+                var distCovered = (Time.time - this.startLerpTime) * 40f;
+                var fracJourney = distCovered / angle;
+
+                this.transform.rotation = Quaternion.Lerp(this.rotationStart, this.rotationTarget, fracJourney);
+            }
         }
 
         private void CheckSolved()
@@ -99,10 +120,38 @@ namespace Assets.Game.Scripts
             {
                 this.puzzleSolved = true;
                 this.gameObject.GetComponent<Collider>().enabled = false;
+
+                this.rotationStart = this.transform.rotation;
+                this.rotationTarget = Quaternion.Euler(new Vector3(this.getNearestFlatAngle(this.rotationStart.eulerAngles.x), this.getNearestFlatAngle(this.rotationStart.eulerAngles.y), 0));
+                this.startLerpTime = Time.time;
+                this.rotationComplete = false;
             }
             else
             {
                 this.puzzleSolved = false;
+            }
+        }
+
+        private float getNearestFlatAngle(float currAngle)
+        {
+            if (currAngle <= -270)
+            {
+                return -360f;
+            } else if (currAngle <= -90)
+            {
+                return -180f;
+            }
+            else if (currAngle <= 90)
+            {
+                return 0f;
+            }
+            else if (currAngle <= 270)
+            {
+                return 180f;
+            }
+            else
+            {
+                return 360f;
             }
         }
 
