@@ -11,9 +11,10 @@ public class PixelCube : MonoBehaviour
     private bool lerpFinished;
     private float lerpStartTime;
     private Transform parentTarget;
-	void Start ()
+    //private Vector3 alwaysStartPos = new Vector3(0.0f, -100.0f, 0.0f);
+    void Start ()
     {
-        transform.parent = parentTarget;
+        //transform.parent = parentTarget;
 	}
 	
 
@@ -21,26 +22,35 @@ public class PixelCube : MonoBehaviour
     {
         if (!lerpFinished)
             doLerp();
-	}
+    }
 
     public void SetStart(Vector3 startPos, float startArea, float minTime, float maxTime, Transform parent)
     {
+        lerpFinished = true;
         destination = transform.localPosition;
-        transform.position = new Vector3(
+        transform.localPosition = new Vector3(
             startPos.x + Random.Range(-(startArea / 2), (startArea / 2)),
-            startPos.y,
+            startPos.y + Random.Range(-(startArea / 2), (startArea / 2)),
             startPos.z + Random.Range(-(startArea / 2), (startArea / 2)));
         lerpDuration = Random.Range(minTime, maxTime);
+        
+        startPosition = transform.localPosition;
+        StartCoroutine(StartLerp());
+        //transform.rotation = parent.localRotation;
+        //parentTarget = parent;
+    }
+
+    IEnumerator StartLerp()
+    {
+        yield return new WaitForSeconds(0f);
         lerpStartTime = Time.time;
-        startPosition = transform.position;
-        transform.rotation = parent.localRotation;
-        parentTarget = parent;
+        lerpFinished = false;
     }
 
     private void doLerp()
     {
-        float durationCount = Time.time - lerpDuration;
-        if (durationCount > lerpDuration)
+        float durationCount = lerpStartTime + lerpDuration;
+        if (Time.time > durationCount)
         {
             durationCount = lerpDuration;
             lerpFinished = true;
@@ -49,5 +59,7 @@ public class PixelCube : MonoBehaviour
         float percent = MovementCurve.Evaluate(timePercent);
         Vector3 newPos = Vector3.LerpUnclamped(startPosition, destination, percent);
         transform.localPosition = newPos;
+        if (lerpFinished)
+            transform.localPosition = destination;
     }
 }
