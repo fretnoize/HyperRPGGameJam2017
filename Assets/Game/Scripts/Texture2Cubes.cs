@@ -6,6 +6,8 @@ namespace Assets.Game.Scripts
 
     using UnityEngine.UI;
 
+    using System.Collections;
+
     using Random = UnityEngine.Random;
 
     public class Texture2Cubes : MonoBehaviour
@@ -38,79 +40,22 @@ namespace Assets.Game.Scripts
 
         private void Awake()
         {
-            //            startMarkerLocation = StartMarker.transform.position;
-            //            Destroy(StartMarker);
-            //            Destroy(DestinationMarker);
+            //startMarkerLocation = StartMarker.transform.localPosition;
+            //Destroy(StartMarker);
+            //Destroy(DestinationMarker);
         }
-        // Use this for initialization
+
+        private void OnEnable()
+        {
+            startMarkerLocation = StartMarker.transform.localPosition;
+            StartMarker.SetActive(false);
+            DestinationMarker.SetActive(false);
+        }
+
         void Start()
         {
-            var textureIndex = ObjectManager.CurrentDisc; // textNum;
-            //if (PlayerPrefs.HasKey("CurrentItem"))
-            //{
-            //    textureIndex = PlayerPrefs.GetInt("CurrentItem");
-            //}
-            var pixels = this.texture2D[textureIndex].GetPixels();
-            var width = this.texture2D[textureIndex].width;
-            var height = this.texture2D[textureIndex].height;
-
-            var x = 0f;
-            var y = 0f;
-            var cubes = 0;
-
-            var minX = 1025f;
-            var maxX = 0f;
-            var minY = 1025f;
-            var maxY = 0f;
-            var minZ = 1025f;
-            var maxZ = 0f;
-
-            this.cubeFolder = new GameObject { name = "Cube Folder" };
-            this.cubeFolder.transform.parent = this.transform;
-
-            Debug.Log(width + "\t" + height);
-            var depth = Convert.ToSingle(width / 1.5);
-
-            foreach (var currColor in pixels)
-            {
-                if (!(Math.Abs(currColor.a) < 0.001f))
-                {
-                    var z = Random.Range(0f, depth);
-                    var cube = Instantiate(this.prefab,
-                        new Vector3(-1 * (width / 2) + x + 1.5f,
-                        -1 * (height / 2) + y - 2.5f,
-                        -1 * Convert.ToSingle(depth / 2) + z), Quaternion.identity);
-
-                    cube.name = "Cube (" + x + ", " + y + ")";
-                    cube.transform.parent = this.cubeFolder.transform;
-                    var cubeRenderer = cube.GetComponent<Renderer>();
-                    cubeRenderer.material.color = currColor;
-                    cubes++;
-                    //                    cube.GetComponent<PixelCube>().SetStart(startMarkerLocation, StartArea, MinFormTime, MaxFormTime, cubeFolder.transform);
-                    //                    cube.transform.parent = null;
-                    minX = Math.Min(x, minX);
-                    minY = Math.Min(y, minY);
-                    minZ = Math.Min(z, minZ);
-
-                    maxX = Math.Max(x, maxX);
-                    maxY = Math.Max(y, maxY);
-                    maxZ = Math.Max(z, maxZ);
-                }
-
-                x++;
-                if (x >= width)
-                {
-                    x = 0;
-                    y++;
-                }
-            }
-
-            var myCollider = this.gameObject.AddComponent<BoxCollider>();
-            myCollider.isTrigger = true;
-            myCollider.size = new Vector3(maxX - minX + 1, maxY - minY + 1, maxZ - minZ + 1);
-            Debug.Log(cubes + " cubes created.");
-
-            SpinPuzzle();
+            //StartCoroutine(StartPuzzle());
+            StartPuzzle();
         }
 
         private void SpinPuzzle()
@@ -126,7 +71,7 @@ namespace Assets.Game.Scripts
 
         void Update()
         {
-            if (this.mouseDown)
+            if (this.mouseDown && this.gameObject.GetComponent<Collider>().enabled)
             {
                 var rotation = new Vector3(Input.GetAxis("Mouse Y"), -Input.GetAxis("Mouse X"), 0) * Time.deltaTime * this.speed;
                 this.SpinPuzzle(rotation);
@@ -153,6 +98,7 @@ namespace Assets.Game.Scripts
                 && (y.CompareTo(this.solvedThreshold) < 0 || (180 - y).CompareTo(this.solvedThreshold) < 0))
             {
                 this.puzzleSolved = true;
+                this.gameObject.GetComponent<Collider>().enabled = false;
             }
             else
             {
@@ -197,6 +143,80 @@ namespace Assets.Game.Scripts
         {
             this.mouseDown = false;
             Debug.Log("The mouse is up on the collider.");
+        }
+
+        private void StartPuzzle()
+        {
+            //yield return new WaitForSeconds(0.5f);
+
+
+            var textureIndex = ObjectManager.CurrentDisc; // textNum;
+            //if (PlayerPrefs.HasKey("CurrentItem"))
+            //{
+            //    textureIndex = PlayerPrefs.GetInt("CurrentItem");
+            //}
+            var pixels = this.texture2D[textureIndex].GetPixels();
+            var width = this.texture2D[textureIndex].width;
+            var height = this.texture2D[textureIndex].height;
+
+            var x = 0f;
+            var y = 0f;
+            var cubes = 0;
+
+            var minX = 1025f;
+            var maxX = 0f;
+            var minY = 1025f;
+            var maxY = 0f;
+            var minZ = 1025f;
+            var maxZ = 0f;
+
+            this.cubeFolder = new GameObject { name = "Cube Folder" };
+            this.cubeFolder.transform.parent = this.transform;
+
+            Debug.Log(width + "\t" + height);
+            var depth = Convert.ToSingle(width / 1.5);
+
+            foreach (var currColor in pixels)
+            {
+                if (!(Math.Abs(currColor.a) < 0.001f))
+                {
+                    var z = Random.Range(0f, depth);
+                    var cube = Instantiate(this.prefab,
+                        new Vector3(-1 * (width / 2) + x + 1.5f,
+                        -1 * (height / 2) + y - 2.5f,
+                        -1 * Convert.ToSingle(depth / 2) + z), Quaternion.identity);
+
+                    cube.name = "Cube (" + x + ", " + y + ")";
+                    cube.transform.parent = this.cubeFolder.transform;
+                    var cubeRenderer = cube.GetComponent<Renderer>();
+                    cubeRenderer.material.color = currColor;
+                    cubes++;
+
+                    cube.GetComponent<PixelCube>().SetStart(startMarkerLocation, StartArea, MinFormTime, MaxFormTime, cubeFolder.transform);
+                    //cube.transform.parent = null;
+                    minX = Math.Min(x, minX);
+                    minY = Math.Min(y, minY);
+                    minZ = Math.Min(z, minZ);
+
+                    maxX = Math.Max(x, maxX);
+                    maxY = Math.Max(y, maxY);
+                    maxZ = Math.Max(z, maxZ);
+                }
+
+                x++;
+                if (x >= width)
+                {
+                    x = 0;
+                    y++;
+                }
+            }
+
+            var myCollider = this.gameObject.AddComponent<BoxCollider>();
+            myCollider.isTrigger = true;
+            myCollider.size = new Vector3(maxX - minX + 1, maxY - minY + 1, maxZ - minZ + 1);
+            Debug.Log(cubes + " cubes created.");
+
+            SpinPuzzle();
         }
     }
 }
