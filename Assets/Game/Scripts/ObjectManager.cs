@@ -7,14 +7,10 @@ namespace Assets.Game.Scripts
         public Transform DiscPrefab;
         public Transform DiscFolder;
 
-        public Transform Puzzle;
-
         [Range(0, 10)]
         public int NumberOfDiscs = 4;
         [Range(0, 75)]
         public float spreadOfDiscs;
-
-        public Texture2D[] puzzles = new Texture2D[4];
 
         // Use this for initialization
         void Start()
@@ -49,24 +45,13 @@ namespace Assets.Game.Scripts
                 disc.name = "Disc " + i;
                 disc.parent = this.DiscFolder.transform;
 
-                DiscCollection discCollection = disc.GetComponent<DiscCollection>();
-                discCollection.objectManager = this;
+                if (i != 0) {Debug.Log((spawns[i] - spawns[i - 1]).magnitude);}
             }
         }
 
         public int GetAvailableDiscCount()
         {
             return this.DiscFolder.childCount;
-        }
-
-        public void removeDisc(DiscCollection discCollection)
-        {
-            var removedIndex = this.NumberOfDiscs - this.GetAvailableDiscCount();
-            Debug.Log("Disc number " + removedIndex + " has been removed.");
-            Destroy(discCollection.gameObject, 1);
-
-            var texture2Cubes = this.Puzzle.GetComponent<Texture2Cubes>();
-            texture2Cubes.LoadImage(this.puzzles[removedIndex]);
         }
     }
 }

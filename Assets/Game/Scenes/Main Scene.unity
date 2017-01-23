@@ -188,7 +188,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 169117662}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -9, z: 185}
+  m_LocalPosition: {x: 0, y: -9, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 879078336}
@@ -717,49 +717,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 366415675}
---- !u!1 &414557855
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 414557857}
-  - component: {fileID: 414557856}
-  m_Layer: 0
-  m_Name: Puzzle
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &414557856
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 414557855}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c43745c45a7ede94ebc86adb8d97cdd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  solvedThreshold: 0.75
-  prefab: {fileID: 1186313980225878, guid: e34e1c476072e1a47a6f9502e4a7de3e, type: 2}
-  speed: 500
---- !u!4 &414557857
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 414557855}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -20}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &442406211
 GameObject:
   m_ObjectHideFlags: 0
@@ -1446,7 +1403,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 681485792}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -200}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1548147347}
@@ -2835,14 +2792,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DiscPrefab: {fileID: 4604524846645948, guid: 958b6c9349132f149982e3f2f7a8eef2, type: 2}
   DiscFolder: {fileID: 886787648}
-  Puzzle: {fileID: 414557857}
   NumberOfDiscs: 4
-  spreadOfDiscs: 0
-  puzzles:
-  - {fileID: 2800000, guid: 376d14462b2f05e4c8eaa21cf1e6a080, type: 3}
-  - {fileID: 2800000, guid: f93c944aab1f0df41a71ed508fb9583c, type: 3}
-  - {fileID: 2800000, guid: c77bb12860478464cba06bdbfb2eed90, type: 3}
-  - {fileID: 2800000, guid: ae073f2939ec5dd41b7c98ddf5c01d30, type: 3}
 --- !u!1 &2146328891
 GameObject:
   m_ObjectHideFlags: 0

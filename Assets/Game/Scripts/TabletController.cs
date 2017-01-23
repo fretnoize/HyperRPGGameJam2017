@@ -13,11 +13,9 @@ namespace Assets.Game.Scripts
         private bool tabletIsUp = false;
 
         private Vector3 startPosition;
-        private readonly Vector3 onScreenPosition = new Vector3(0, -2, 185);
+        private readonly Vector3 onScreenPosition = new Vector3(0, -2, -1);
 
         private float tabletMovementSpeed = 15f;
-
-        private bool lockTabletLowering = false;
 
         private float startLerpTime;
 
@@ -68,7 +66,7 @@ namespace Assets.Game.Scripts
                 return;
             }
 
-            if (Input.GetAxis("Vertical") < 0 && !this.raiseTablet && !this.lowerTablet && !this.lockTabletLowering)
+            if (Input.GetAxis("Vertical") < 0 && !this.raiseTablet && !this.lowerTablet)
             {
                 if (this.tabletIsUp)
                 {

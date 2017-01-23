@@ -8,10 +8,22 @@ namespace Assets.Game.Scripts
 
     public class Texture2Cubes : MonoBehaviour
     {
-        public float solvedThreshold = 0.75f;
+        private float solvedThreshold = 2.5f;
 
+        public Texture2D texture2D;
         public GameObject prefab;
         public float speed = 500.0f;
+
+        [Tooltip("Destination is just a visual aid, keep at 0,0,0")]
+        public GameObject DestinationMarker;
+        [Tooltip("Center of horizontal plane PixelCubes spawn at")]
+        public GameObject StartMarker;
+        [Tooltip("Length and depth of the area PixelCubes can randomly spawn")]
+        public float StartArea;
+
+        public float MinFormTime, MaxFormTime;
+
+        private Vector3 startMarkerLocation;
 
         private bool mouseDown = false;
 
@@ -19,14 +31,18 @@ namespace Assets.Game.Scripts
 
         private GameObject cubeFolder;
 
-        private bool puzzleLoaded = false;
-
-        public void LoadImage(Texture2D texture2D)
+        private void Awake()
         {
-            Debug.Log("Loading a texture" + texture2D.name);
-            var pixels = texture2D.GetPixels();
-            var width = texture2D.width;
-            var height = texture2D.height;
+            this.startMarkerLocation = this.StartMarker.transform.position;
+            Destroy(this.StartMarker);
+            Destroy(this.DestinationMarker);
+        }
+        // Use this for initialization
+        void Start()
+        {
+            var pixels = this.texture2D.GetPixels();
+            var width = this.texture2D.width;
+            var height = this.texture2D.height;
 
             var x = 0f;
             var y = 0f;
@@ -42,6 +58,7 @@ namespace Assets.Game.Scripts
             this.cubeFolder = new GameObject { name = "Cube Folder" };
             this.cubeFolder.transform.parent = this.transform;
 
+            Debug.Log(width + "\t" + height);
             var depth = Convert.ToSingle(width / 1.5);
 
             foreach (var currColor in pixels)
@@ -59,6 +76,8 @@ namespace Assets.Game.Scripts
                     var cubeRenderer = cube.GetComponent<Renderer>();
                     cubeRenderer.material.color = currColor;
                     cubes++;
+                    cube.GetComponent<PixelCube>().SetStart(this.startMarkerLocation, this.StartArea, this.MinFormTime, this.MaxFormTime, this.cubeFolder.transform);
+                    cube.transform.parent = null;
                     minX = Math.Min(x, minX);
                     minY = Math.Min(y, minY);
                     minZ = Math.Min(z, minZ);
@@ -82,10 +101,6 @@ namespace Assets.Game.Scripts
             Debug.Log(cubes + " cubes created.");
 
             this.SpinPuzzle();
-
-            this.puzzleLoaded = true;
-
-            this.gameObject.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         }
 
         private void SpinPuzzle()
@@ -97,20 +112,22 @@ namespace Assets.Game.Scripts
         private void SpinPuzzle(Vector3 rotation)
         {
             this.transform.Rotate(rotation, Space.World);
+
+            foreach (Transform component in this.cubeFolder.transform)
+            {
+                component.rotation = Quaternion.identity;
+            }
         }
 
         void Update()
         {
-            if (this.puzzleLoaded)
+            if (this.mouseDown)
             {
-                if (this.mouseDown)
-                {
-                    var rotation = new Vector3(Input.GetAxis("Mouse Y"), -Input.GetAxis("Mouse X"), 0) * Time.deltaTime * this.speed;
-                    this.SpinPuzzle(rotation);
-                }
-
-                this.CheckSolved();
+                var rotation = new Vector3(Input.GetAxis("Mouse Y"), -Input.GetAxis("Mouse X"), 0) * Time.deltaTime * this.speed;
+                this.SpinPuzzle(rotation);
             }
+
+            this.CheckSolved();
         }
 
         private void CheckSolved()
