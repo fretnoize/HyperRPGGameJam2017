@@ -34,6 +34,8 @@ namespace Assets.Game.Scripts
 
         private GameObject cubeFolder;
 
+        public int textNum;
+
         private void Awake()
         {
             //            startMarkerLocation = StartMarker.transform.position;
@@ -43,7 +45,7 @@ namespace Assets.Game.Scripts
         // Use this for initialization
         void Start()
         {
-            var textureIndex = 0;
+            var textureIndex = textNum;
             if (PlayerPrefs.HasKey("CurrentItem"))
             {
                 textureIndex = PlayerPrefs.GetInt("CurrentItem");
