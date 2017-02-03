@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 903c6321a01455c409febb1f2d83a3bf
+timeCreated: 1486148079
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Manifold CF
+  fontNames:
+  - Manifold CF
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 13d8a46e29244a044b462701548a554a, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
