@@ -11,6 +11,8 @@ namespace Assets.Game.Scripts
 
         public GameObject StartText, FinishText;
 
+        public NewsPaperController NewsCntl;
+
         private bool raiseTablet;
         private bool lowerTablet;
 
@@ -70,7 +72,10 @@ namespace Assets.Game.Scripts
                 return;
             }
 
-            if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) && !this.raiseTablet && !this.lowerTablet)
+            if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) 
+                && !this.raiseTablet 
+                && !this.lowerTablet
+                && !NewsCntl.NewsPaperInputLock)
             {
                 if (this.tabletIsUp)
                 {

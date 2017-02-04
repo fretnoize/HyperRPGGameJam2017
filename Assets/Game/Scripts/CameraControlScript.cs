@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace Assets.Game.Scripts
 {
@@ -9,6 +9,8 @@ namespace Assets.Game.Scripts
 
         // this is the backdrop texture/sprite for the scene, used to tell the camera where the edge of the scene is
         public SpriteRenderer backdrop;
+
+        public NewsPaperController NewsCntl;
 
         // Use this for initialization
         private void Start ()
@@ -36,7 +38,9 @@ namespace Assets.Game.Scripts
             }
 
             // seems a more general form of getting "left/right" user input. Both arrow keys and WASD
-            var moveHorizontal = Input.GetAxis ("Horizontal");
+            var moveHorizontal = 0.0f;
+            if (!NewsCntl.NewsPaperInputLock)
+                moveHorizontal = Input.GetAxis ("Horizontal");
 
             // wrapping the camera to the other side of the scene
             // `backdrop.bounds.max.x` is the rightmost edge of the backdrop (pos x) while `min` is the leftmost edge

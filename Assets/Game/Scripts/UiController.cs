@@ -14,7 +14,8 @@ namespace Assets.Game.Scripts
         public static bool optionsMenu;
         public static bool mainMenu;
 
-        public InstructionsController Instructions;
+        public GameObject NewsPapers;
+        public NewsPaperController NewsCntl;
 
         private bool onMainMenu = true;
 
@@ -27,7 +28,7 @@ namespace Assets.Game.Scripts
 
         void Start()
         {
-            
+            //NewsPapers.SetActive(false);
             //PlayerPrefs.DeleteAll();
             menuObjects = GameObject.FindGameObjectsWithTag("MainMenu");
             optionsObjects = GameObject.FindGameObjectsWithTag("Options");
@@ -52,7 +53,7 @@ namespace Assets.Game.Scripts
         void Update()
         {
             // press esc to open and close the options menu
-            if (!this.onMainMenu && Input.GetKeyDown(KeyCode.Escape))
+            if (!this.onMainMenu && Input.GetKeyDown(KeyCode.Escape) && !NewsCntl.NewsPaperInputLock)
             {
                 ToggleOptions();
             }
@@ -63,7 +64,10 @@ namespace Assets.Game.Scripts
         {
             ToggleMenu();
             this.onMainMenu = false;
-            Instructions.gameObject.SetActive(true);
+            NewsPapers.SetActive(true);
+            
+
+
         }
 
         // deactivates the main menu objects, activates the options objects
