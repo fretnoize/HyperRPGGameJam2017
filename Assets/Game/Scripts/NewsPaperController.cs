@@ -26,9 +26,21 @@ public class NewsPaperController : MonoBehaviour
 
 	void Update ()
     {
-        if (!Displayed && Input.anyKeyDown)
+        bool advance = ( Input.GetKeyDown(KeyCode.D) 
+                      || Input.GetKeyDown(KeyCode.RightArrow)
+                      || Input.GetMouseButtonDown(0));
+
+        bool retreat = ( Input.GetKeyDown(KeyCode.A)
+                      || Input.GetKeyDown(KeyCode.LeftArrow)
+                      || Input.GetMouseButtonDown(1));
+
+        if (!Displayed && advance)
         {
             displayPage();
+        }
+        else if ( (iterator > 0) && retreat )
+        {
+            hidePage();
         }
 	}
 
@@ -57,5 +69,12 @@ public class NewsPaperController : MonoBehaviour
             NewsPaperInputLock = false;
             Instructions.gameObject.SetActive(true);
         }
+    }
+
+    private void hidePage()
+    {
+        Pages[iterator].SetActive(false);
+        --iterator;
+        Pages[iterator].SetActive(true);
     }
 }
