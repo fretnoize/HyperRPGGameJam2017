@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
+using System.Collections;
+
 
 namespace Assets.Game.Scripts
 {
@@ -6,6 +8,8 @@ namespace Assets.Game.Scripts
     {
         public Transform tabletOn;
         public Transform tabletOff;
+
+        public GameObject StartText, FinishText;
 
         private bool raiseTablet;
         private bool lowerTablet;
@@ -66,7 +70,7 @@ namespace Assets.Game.Scripts
                 return;
             }
 
-            if (Input.GetAxis("Vertical") < 0 && !this.raiseTablet && !this.lowerTablet)
+            if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) && !this.raiseTablet && !this.lowerTablet)
             {
                 if (this.tabletIsUp)
                 {
@@ -115,6 +119,20 @@ namespace Assets.Game.Scripts
                 this.triggeredPosition = this.transform.localPosition;
                 this.movementDistance = Vector3.Distance(this.triggeredPosition, this.startPosition);
             }
+        }
+
+        public void DisplayEndText()
+        {
+            StartText.SetActive(false);
+            FinishText.SetActive(true);
+            BringTabletUp();
+            StartCoroutine(LoadEndCredits());
+        }
+
+        IEnumerator LoadEndCredits()
+        {
+            yield return new WaitForSeconds(5.0f);
+            UnityEngine.SceneManagement.SceneManager.LoadScene("EndCredits");
         }
     }
 }

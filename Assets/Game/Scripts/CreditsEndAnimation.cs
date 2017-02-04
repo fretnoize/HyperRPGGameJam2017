@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,9 +8,10 @@ public class CreditsEndAnimation : CreditsTools {
     }
 
     void Update () {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.anyKeyDown)
         {
-            // TODO something to exit the credits
+            Application.Quit();
+            //UnityEngine.SceneManagement.SceneManager.LoadScene("Main Scene");
         }
     }
 	
@@ -32,7 +33,7 @@ public class CreditsEndAnimation : CreditsTools {
                 "<size=32><b>Lead Quality Assurance</b></size>", "Kristal “Lady Kakyuu” Rupard"
             },
             new string[] {
-                "<size=32><b>Music</b></size>", "Poor Alexei - ‘Interiors’", "Visager - ‘Village Dreaming’", "Aaron C. Edwards - ‘Don’t Cry’"
+                "<size=32><b>Music</b></size>", "Fretnoize - Opening Credits", "Aaron C. Edwards - ‘Don’t Cry’"
             },
             new string[] {
                 "<size=32><b>Special Thanks</b></size>", "To the thumper community and HyperRPG", "To the Global Game Jam", "And you the player"
@@ -40,7 +41,7 @@ public class CreditsEndAnimation : CreditsTools {
         };
         string[] linesScroll = new string[] {
             "<size=32><b>Writers</b></size>", "Dgwritingfiend", "Stephen “Xjere” Zalar", "Bonebumble", "Louis “SillySonny” Goodwin", "",
-            "<size=32><b>Programmers</b></size>", "Anna M. Berg", "Nick “quiet_geek” Elliott", "",
+            "<size=32><b>Programmers</b></size>", "Anna M. Berg", "Nick “quiet_geek” Elliott", "Fretnoize", "KyuuiPenguin",  "",
             "<size=32><b>Artists</b></size>", "Jennifer “aminim00se” Cleary", "",
             "<size=32><b>Sound Designer</b></size>", "Dgwritingfiend", "",
             "<size=32><b>Sound Consultant</b></size>", "Louis “SillySonny” Goodwin", "",

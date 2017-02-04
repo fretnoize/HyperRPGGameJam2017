@@ -14,6 +14,8 @@ namespace Assets.Game.Scripts
         public static bool optionsMenu;
         public static bool mainMenu;
 
+        public InstructionsController Instructions;
+
         private bool onMainMenu = true;
 
         // audio
@@ -61,6 +63,7 @@ namespace Assets.Game.Scripts
         {
             ToggleMenu();
             this.onMainMenu = false;
+            Instructions.gameObject.SetActive(true);
         }
 
         // deactivates the main menu objects, activates the options objects
@@ -121,7 +124,7 @@ namespace Assets.Game.Scripts
         // activates/deactivates the main menu objects
         private static void ToggleMenu()
         {
-            Debug.Log("Menu");
+            //Debug.Log("Menu");
             foreach (var m in menuObjects)
             {
                 m.SetActive(mainMenu);

@@ -11,8 +11,23 @@ public class CreditsTools : MonoBehaviour {
     public float scrollStep = 1f;
     public float typedDelay = 0.1f;
     public float floatIntervals = 60;
-
+    
     protected bool running = true;
+    
+    private AudioSource audioSource;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            Debug.LogError("No AudioSource on Credits object\n");
+        }
+        else
+        {
+            audioSource.Play();
+        }
+    }
 
 
 

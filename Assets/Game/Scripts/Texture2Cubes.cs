@@ -184,13 +184,13 @@ namespace Assets.Game.Scripts
         void OnMouseDown()
         {
             this.mouseDown = true;
-            Debug.Log("The mouse is down on the collider.");
+            //Debug.Log("The mouse is down on the collider.");
         }
 
         void OnMouseUp()
         {
             this.mouseDown = false;
-            Debug.Log("The mouse is up on the collider.");
+            //Debug.Log("The mouse is up on the collider.");
         }
 
         private void StartPuzzle()
@@ -221,7 +221,7 @@ namespace Assets.Game.Scripts
             this.cubeFolder = new GameObject { name = "Cube Folder" };
             this.cubeFolder.transform.parent = this.transform;
 
-            Debug.Log(width + "\t" + height);
+            //Debug.Log(width + "\t" + height);
             var depth = Convert.ToSingle(width / 1.5);
 
             foreach (var currColor in pixels)
@@ -262,7 +262,7 @@ namespace Assets.Game.Scripts
             var myCollider = this.gameObject.AddComponent<BoxCollider>();
             myCollider.isTrigger = true;
             myCollider.size = new Vector3(maxX - minX + 1, maxY - minY + 1, maxZ - minZ + 1);
-            Debug.Log(cubes + " cubes created.");
+            //Debug.Log(cubes + " cubes created.");
 
             SpinPuzzle();
         }
