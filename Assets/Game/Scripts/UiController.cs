@@ -16,6 +16,7 @@ namespace Assets.Game.Scripts
 
         public GameObject NewsPapers;
         public NewsPaperController NewsCntl;
+        public GameObject Instructions;
 
         private bool onMainMenu = true;
 
@@ -64,8 +65,9 @@ namespace Assets.Game.Scripts
         {
             ToggleMenu();
             this.onMainMenu = false;
-            NewsPapers.SetActive(true);
-            
+            Instructions.gameObject.SetActive(true);
+            //NewsPapers.SetActive(true);
+            Instructions.SetActive(true);
 
 
         }

@@ -6,7 +6,7 @@ public class NewsPaperController : MonoBehaviour
 {
     public GameObject[] Pages;
 
-    public static bool Displayed; //all pages seen
+    //public static bool Displayed; //all pages seen
 
     [HideInInspector]
     public bool NewsPaperInputLock; //lock for newspaper control
@@ -14,43 +14,36 @@ public class NewsPaperController : MonoBehaviour
     private int iterator = 0;
     
     public InstructionsController Instructions;
-
-    void Start ()
-    {
-        if (Displayed)
-        {
-            gameObject.SetActive(false);
-        }
-	}
-	
-
+    
 	void Update ()
     {
-        bool advance = ( Input.GetKeyDown(KeyCode.D) 
+        if (Input.GetKeyDown(KeyCode.D)
                       || Input.GetKeyDown(KeyCode.RightArrow)
-                      || Input.GetMouseButtonDown(0));
-
-        bool retreat = ( Input.GetKeyDown(KeyCode.A)
-                      || Input.GetKeyDown(KeyCode.LeftArrow)
-                      || Input.GetMouseButtonDown(1));
-
-        if (!Displayed && advance)
+                      || Input.GetMouseButtonDown(0))
         {
+            incrementPage();
             displayPage();
         }
-        else if ( (iterator > 0) && retreat )
+
+        if (Input.GetKeyDown(KeyCode.A)
+                      || Input.GetKeyDown(KeyCode.LeftArrow)
+                      || Input.GetMouseButtonDown(1))
         {
-            hidePage();
+            decrementPage();
+            displayPage();
         }
 	}
 
     private void OnEnable()
     {
-        if (!Displayed)
-        {
-            NewsPaperInputLock = true;
-            displayPage();
-        }
+        NewsPaperInputLock = true;
+        displayPage();
+        iterator = 0;
+    }
+
+    private void OnDisable()
+    {
+        NewsPaperInputLock = false;
     }
 
     private void displayPage()
@@ -61,20 +54,23 @@ public class NewsPaperController : MonoBehaviour
         }
 
         Pages[iterator].SetActive(true);
+    }
+
+    private void incrementPage()
+    {
         ++iterator;
         if (iterator >= Pages.Length)
         {
-            Displayed = true;
-            gameObject.SetActive(false);
-            NewsPaperInputLock = false;
-            Instructions.gameObject.SetActive(true);
+            iterator = 0;
         }
     }
 
-    private void hidePage()
+    private void decrementPage()
     {
-        Pages[iterator].SetActive(false);
         --iterator;
-        Pages[iterator].SetActive(true);
+        if (iterator < 0)
+        {
+            iterator = Pages.Length - 1;
+        }
     }
 }
